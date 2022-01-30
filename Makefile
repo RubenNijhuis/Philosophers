@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/24 19:46:54 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/01/27 14:19:28 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/01/29 20:11:01 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,30 +16,29 @@ SRC_DIR := ./src
 BIN_DIR := ./bin
 LIB_DIR := ./libs
 
-OBJS := main.o \
-		utils/ft_calloc.o
+HEADERFILES := $(INCLUDE_DIR)/$(NAME).h
 
-INCLUDES := 
+OBJS := src/main.o \
+		src/utils/validate_arguments.o \
+		src/utils/initiate_data.o \
+		src/utils/ft_atoi.o \
+		src/utils/ft_calloc.o \
 
-SRCS_PREFIX = $(SRCS:%=$(SRC_DIR)/%)
-INCLUDES_PREFIX = $(INCLUDES:%=$(INCLUDE_DIR)/%)
-
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror
-LINK := $(CC) $(CFLAGS)
+CC=clang
+CFLAGS=-Wall -Wextra -g -fsanitize=address
+LDFLAGS=-g -fsanitize=address
 
 TEST_COMMAND = 5 1000 1000 1000
 
-# $(NAME):$(OBJS) $(INCLUDE_DIR)/$(NAME).h
-# 	$(LINK) $(SRCS_PREFIX) -o $(BIN_DIR)/$(NAME)
+$(NAME):$(OBJS)
+	@$(CC) $(OBJS) $(LDFLAGS) -o ./bin/philo
 
-%.o:%.c
-	gcc -c -Wall -Wextra -Werror -I $(INCLUDE_DIR) -o $@ $^
+obj/%.o:src/%.c ./include/philo.h
+	@mkdir -p $(dir $@)
+	@$(CC) -c $(CFLAGS) -o $@ $^
 
 run:
 	$(BIN_DIR)/$(NAME) $(TEST_COMMAND)
-
-all: run
 
 clean:
 	@rm -rf $(OBJS)
@@ -48,6 +47,8 @@ clean:
 fclean: clean
 	@rm -rf $(BIN_DIR)/$(NAME)
 	@echo "🧹 Removing $(NAME) executable"
+
+all: $(NAME) clean
 
 re: fclean all
 
