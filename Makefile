@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/24 19:46:54 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/01/29 20:11:01 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/02/23 16:14:22 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,19 +23,20 @@ OBJS := src/main.o \
 		src/utils/initiate_data.o \
 		src/utils/ft_atoi.o \
 		src/utils/ft_calloc.o \
+		src/utils/convert_time.o \
 
 CC=clang
 CFLAGS=-Wall -Wextra -g -fsanitize=address
 LDFLAGS=-g -fsanitize=address
 
-TEST_COMMAND = 5 1000 1000 1000
-
-$(NAME):$(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) -o ./bin/philo
+TEST_COMMAND = 5 1800 1200 1200
 
 obj/%.o:src/%.c ./include/philo.h
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) -o $@ $^
+
+$(NAME):$(OBJS)
+	@$(CC) $(OBJS) $(LDFLAGS) -o ./bin/philo
 
 run:
 	$(BIN_DIR)/$(NAME) $(TEST_COMMAND)

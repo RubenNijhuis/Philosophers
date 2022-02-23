@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/01/30 09:47:04 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/02/23 16:19:15 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,33 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef struct s_forks
+{
+	int				
+	pthread_mutex_t	forks[200];
+}	t_forks
+
 typedef struct s_program_data
 {
 	int				amount_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
 	int				amount_meals;
-	int				*forks;
 	struct timezone	tz;
 	struct timeval	tv;
-	pthread_t		*philosophers;
-	pthread_mutex_t	lock;
+	pthread_t		philosophers[200];
 }	t_program_data;
 
 typedef struct s_philosopher
 {
-	int				start_time;
+	long			start_time;
 	int				id;
-	int				last_time_eaten;
+	long			last_time_eaten;
 	int				times_eaten;
 	int				left_fork;
 	int				right_fork;
-	t_program_data	*program_data;
+	t_program_data	*pd;
 }	t_philosopher;
 
 // General utils

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/28 08:49:44 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/01/28 08:52:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/02/23 13:56:45 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,4 @@ void initiate_data(t_program_data *pd, char **argv)
 	pd->time_to_die = time_to_die;
 	pd->time_to_eat = time_to_eat;
 	pd->time_to_sleep = time_to_sleep;
-
-	pd->forks = ft_calloc(pd->amount_philo, sizeof(int));
 }
