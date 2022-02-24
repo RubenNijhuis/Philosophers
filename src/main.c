@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/02/23 16:28:43 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/02/24 17:57:26 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,19 @@
 
 // }
 
-// int		check_forks(t_program_data *pd, int left_fork, int right_fork);
-// {
-// 	// Links
-// 	pthread_mutex_lock(&philo->pd->forks[philo->left_fork]);
-// 	printf("%i picked up left fork\n", philo->id);
-// 	// Rechts
-// 	pthread_mutex_lock(&philo->pd->forks[philo->right_fork]);
-// 	printf("%i picked up right fork\n", philo->id);
-// }
+int	check_forks_availability(t_program_data *pd, int left_fork, int right_fork)
+{
+	// Links
+	pthread_mutex_lock(&pd->forks[left_fork]);
+	// printf("%i picked up left fork\n", philo->id);
+	
+	// Rechts
+	pthread_mutex_lock(&pd->forks[right_fork]);
+	
+	pthread_mutex_unlock(&pd->forks[left_fork]);
+	pthread_mutex_unlock(&pd->forks[right_fork]);
+	return (1);
+}
 
 void	*run_philosopher(void *philosopher)
 {
@@ -46,11 +50,11 @@ void	*run_philosopher(void *philosopher)
 	while (1)
 	{
 		usleep(100000);
-		check_forks(philo->program_data)
+		if (check_forks_availability(philo->pd, philo->left_fork, philo->right_fork))
+		{
 			printf("%i is eating\n", philo->id);
-		usleep(philo->pd->time_to_eat * 1000);
-		pthread_mutex_unlock(&philo->pd->forks[philo->id - 1]);
-		pthread_mutex_unlock(&philo->pd->forks[philo->id]);
+			usleep(philo->pd->time_to_eat * 1000);
+		}
 		printf("%i is sleeping\n", philo->id);
 		usleep(philo->pd->time_to_sleep * 1000);
 		printf("%i philo is thinking\n", philo->id);
