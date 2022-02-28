@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/02/24 17:49:21 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/02/28 14:18:23 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+enum Bool { FALSE, TRUE };
+
 typedef struct s_program_data
 {
 	int				amount_philo;
@@ -25,6 +27,7 @@ typedef struct s_program_data
 	long			time_to_sleep;
 	int				amount_meals;
 	pthread_mutex_t	forks[200];
+	int				forks_available[200];
 	struct timezone	tz;
 	struct timeval	tv;
 	pthread_t		philosophers[200];
@@ -46,6 +49,10 @@ void	*ft_calloc(size_t count, size_t size);
 int		ft_atoi(const char *src);
 int		validate_arguments(int argc, char **argv);
 void	initiate_data(t_program_data *pd, char **argv);
+void	*run_philosopher(void *philosopher);
+
+void	make_threads(t_program_data *pd, int id);
+void	make_forks(t_program_data *pd, int id);
 
 // Thread utils
 void	close_threads(t_program_data *pd);

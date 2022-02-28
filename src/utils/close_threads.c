@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/01/27 13:17:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/02/28 13:55:47 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /**
  * @brief 
- * 
  * Small function to close all threads, probably only used if
  * program takes an "amount_meals" argument
  * @param pd (t_program_data)

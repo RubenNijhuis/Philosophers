@@ -6,7 +6,7 @@
 #    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/24 19:46:54 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/02/23 16:14:22 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/02/28 14:19:39 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,13 @@ LIB_DIR := ./libs
 HEADERFILES := $(INCLUDE_DIR)/$(NAME).h
 
 OBJS := src/main.o \
-		src/utils/validate_arguments.o \
-		src/utils/initiate_data.o \
 		src/utils/ft_atoi.o \
 		src/utils/ft_calloc.o \
 		src/utils/convert_time.o \
+		src/utils/initiate_data.o \
+		src/utils/close_threads.o \
+		src/utils/make_threads.o \
+		src/utils/validate_arguments.o \
 
 CC=clang
 CFLAGS=-Wall -Wextra -g -fsanitize=address

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/02/24 17:57:26 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/02/28 14:27:08 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,27 @@
 // Include
 #include <stdio.h>
 
-// void	eat(t_philosopher *philo)
-// {
-
-// }
-
-// void pick_up_forks(t_philosopher *philo)
-// {
-
-// }
-
-int	check_forks_availability(t_program_data *pd, int left_fork, int right_fork)
+enum Bool	eat(t_philosopher *philo)
 {
-	// Links
-	pthread_mutex_lock(&pd->forks[left_fork]);
-	// printf("%i picked up left fork\n", philo->id);
-	
-	// Rechts
-	pthread_mutex_lock(&pd->forks[right_fork]);
-	
-	pthread_mutex_unlock(&pd->forks[left_fork]);
-	pthread_mutex_unlock(&pd->forks[right_fork]);
-	return (1);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->pd->forks[philo->left_fork]);
+		printf("%i picked up left fork\n", philo->id);
+		pthread_mutex_lock(&philo->pd->forks[philo->right_fork]);
+		printf("%i picked up right fork\n", philo->id);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->pd->forks[philo->right_fork]);
+		printf("%i picked up right fork\n", philo->id);
+		pthread_mutex_lock(&philo->pd->forks[philo->left_fork]);
+		printf("%i picked up left fork\n", philo->id);
+	}
+	printf("%i %i is eating\n", philo->philo->id);
+	usleep(philo->pd->time_to_eat * 1000);
+	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
+	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
+	return (TRUE);
 }
 
 void	*run_philosopher(void *philosopher)
@@ -46,15 +45,13 @@ void	*run_philosopher(void *philosopher)
 
 	philo = (t_philosopher *)philosopher;
 	gettimeofday(&philo->pd->tv, &philo->pd->tz);
-	philo->last_time_eaten = philo->pd->tv.tv_usec / 1000;
+	philo->last_time_eaten = philo->pd->tv.tv_usec / 1000 + philo->pd->tv.tv_sec * 1000;
 	while (1)
 	{
-		usleep(100000);
-		if (check_forks_availability(philo->pd, philo->left_fork, philo->right_fork))
-		{
-			printf("%i is eating\n", philo->id);
-			usleep(philo->pd->time_to_eat * 1000);
-		}
+		usleep(750000);
+		eat(philo);
+		gettimeofday(&philo->pd->tv, &philo->pd->tz);
+		philo->last_time_eaten = philo->pd->tv.tv_usec / 1000 + philo->pd->tv.tv_sec * 1000;
 		printf("%i is sleeping\n", philo->id);
 		usleep(philo->pd->time_to_sleep * 1000);
 		printf("%i philo is thinking\n", philo->id);
@@ -62,56 +59,27 @@ void	*run_philosopher(void *philosopher)
 	return (NULL);
 }
 
-/**
-• Each philosopher should be a thread.
-
-• There is one fork between each pair of philosophers. Therefore,
-	if there are several
-  philosophers,
-	each philosopher has a fork on their left side and a fork on their right
-  side. If there is only one philosopher,
-	there should be only one fork on the table.
-
-• To prevent philosophers from duplicating forks,
-	you should protect the forks state
-  with a mutex for each of them.
-*/
-
 void	initiate_table(t_program_data *pd)
 {
-	int				i;
-	t_philosopher	*philo;
+	int	i;
 
 	gettimeofday(&pd->tv, &pd->tz);
 	i = 0;
 	while (i < pd->amount_philo)
 	{
-		pthread_mutex_init(&pd->forks[i], NULL);
-		philo = ft_calloc(1, sizeof(t_philosopher));
-		philo->pd = pd;
-		philo->start_time = pd->tv.tv_usec / 1000;
-		philo->id = i + 1;
-		if (i == 0)
-		{
-			philo->left_fork = pd->amount_philo - 1;
-			philo->right_fork = 0;
-		}
-		else if (i == pd->amount_philo - 1)
-		{
-			philo->left_fork = i - 1;
-			philo->right_fork = pd->amount_philo - 1;
-		}
-		else
-		{
-			philo->left_fork = i - 1;
-			philo->right_fork = i;
-		}
-		printf("%i lf: %i -- rf: %i\n", philo->id, philo->left_fork,
-				philo->right_fork);
-		pthread_create(&pd->philosophers[i], NULL, run_philosopher, philo);
+		make_forks(pd, i);
+		make_threads(pd, i);
 		i++;
 	}
 }
+
+/**
+ * TODO: Maak extra thread die de doodheid van philos checkt
+ * TODO: Tijd uitvogelen
+ * TODO: 
+ * 
+ * 
+ */
 
 int	main(int argc, char **argv)
 {
@@ -119,14 +87,12 @@ int	main(int argc, char **argv)
 
 	if (!validate_arguments(argc, argv))
 	{
-		printf("Amount vars not ok\n");
-		usleep(1250000);
-		printf("\nidiot\n");
+		printf("Number of arguments insufficient\n");
 		return (1);
 	}
 	initiate_data(&program_data, argv);
 	initiate_table(&program_data);
-	for (int i = 0; i < program_data.amount_philo; i++)
-		pthread_join(program_data.philosophers[i], NULL);
+	// initiate_death_checker(&program_data);
+	close_threads(&program_data);
 	return (0);
 }
