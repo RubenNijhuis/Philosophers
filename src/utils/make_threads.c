@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   make_threads.c                                     :+:    :+:            */
+/*   make_philo_thread.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/02/28 14:19:57 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/03 10:16:31 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
+#include <pthread.h>
 
-void	make_forks(t_program_data *pd, int id)
+void	make_fork(t_program_data *pd, int id)
 {
 	pthread_mutex_init(&pd->forks[id], NULL);
 }
 
-void	make_threads(t_program_data *pd, int id)
+void	make_philo_thread(t_program_data *pd, int id)
 {
 	t_philosopher	*philo;
 
 	philo = ft_calloc(1, sizeof(t_philosopher));
 	philo->pd = pd;
-	philo->start_time = philo->pd->tv.tv_usec / 1000 + philo->pd->tv.tv_sec * 1000;
+	philo->start_time = gettime(philo->pd->tv);
 	philo->id = id + 1;
 	philo->right_fork = id;
 	if (id == 0)
