@@ -1,11 +1,9 @@
-# Basic-C-Template
-👨🏽‍🍳 Basic project template for general C projects
+# Philosophers
+🧐  Philosophers is a project to test and practice multithreading
 
 ## Structure
 ```
-/- Basic-C-Template
-    /- Assets
-        # Any assets like images or text files can be put here
+/- Philo
     /- bin
         # output binaries are put here and not committed
     /- include
@@ -14,14 +12,12 @@
         # included libraries like libft or get_next_line are put here
     /- src
         # your project files can be ordered here
-    .gitignore # i really shouldn't have to explain this
-    LICENS # mit licens for license reasons
-    Makefile # magic happens here
-    README.md # the file that contains what you are currently reading
+    Makefile # compiling magic happens here
 ```
 
-## Used by projects like
-Pipex - https://github.com/RubenNijhuis/Pipex
-Philosophers - https://github.com/RubenNijhuis/Philosophers
-So Long - https://github.com/RubenNijhuis/So-Long
+## Examples
+These projects (although altered from the original) use the template
+Pipex - https://github.com/RubenNijhuis/Pipex <br>
+Philosophers - https://github.com/RubenNijhuis/Philosophers <br>
+So Long - https://github.com/RubenNijhuis/So-Long <br>
 Push Swap - https://github.com/RubenNijhuis/Push-Swap
