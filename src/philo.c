@@ -6,13 +6,20 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/03 11:23:23 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/03 18:38:21 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 #include <stdio.h>
 #include <unistd.h>
+
+enum e_Bool	stop_sim(t_program_data *pd)
+{
+	if (pd->stop_sim == true)
+		return (true);
+	return (false);
+}
 
 enum e_Bool	eat(t_philosopher *philo)
 {
@@ -42,7 +49,7 @@ void	*run_philosopher(void *philosopher)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)philosopher;
-	while (1)
+	while (!stop_sim(philo->pd))
 	{
 		usleep(50000);
 		eat(philo);
