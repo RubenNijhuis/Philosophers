@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/03 18:36:06 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/04 08:01:54 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*run_death_checker(void *philos_array)
 			if ((gettime(cur_philo.pd->tv) - cur_philo.last_time_eaten) > time_to_die)
 			{
 				cur_philo.pd->stop_sim = true;
-				write(1, "yo me is dead\n", 14);
+				printf("%li %i died\n", gettime(cur_philo.pd->tv), cur_philo_id);
 				return (NULL);
 			}
 			cur_philo_id++;
@@ -49,6 +49,7 @@ void	sim_death_checker(t_philosopher *philos)
 {
 	pthread_t	death_checker;
 	
+	usleep(1 * 1000);
 	pthread_create(&death_checker, NULL, run_death_checker, philos);
 	pthread_join(death_checker, NULL);
 }

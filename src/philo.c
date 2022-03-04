@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/03 18:38:21 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/04 07:57:59 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*run_philosopher(void *philosopher)
 	philo = (t_philosopher *)philosopher;
 	while (!stop_sim(philo->pd))
 	{
-		usleep(50000);
+		// usleep_optimized(10000);
 		eat(philo);
 		printf("%li %i is sleeping\n", gettime(philo->pd->tv), philo->id);
 		usleep(philo->pd->time_to_sleep * 1000);
