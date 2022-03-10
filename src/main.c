@@ -6,11 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:11:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/10 13:24:15 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "philo.h"
 #include <stdio.h>
 
 int	main(int argc, char **argv)

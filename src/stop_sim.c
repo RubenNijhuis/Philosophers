@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/04 08:01:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/10 14:22:14 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // It loops constantly checking if all the philo's are dead
 // It also checks whether the philo's have eaten
 
-#include "../include/philo.h"
+#include "philo.h"
 #include <unistd.h>
 #include <stdio.h>
 
@@ -33,10 +33,12 @@ void	*run_death_checker(void *philos_array)
 		cur_philo = philos[cur_philo_id];
 		while (cur_philo_id < cur_philo.pd->amount_philo)
 		{
-			if ((gettime(cur_philo.pd->tv) - cur_philo.last_time_eaten) > time_to_die)
+			if ((gettime() - cur_philo.last_time_eaten) > time_to_die)
 			{
 				cur_philo.pd->stop_sim = true;
-				printf("%li %i died\n", gettime(cur_philo.pd->tv), cur_philo_id);
+				pthread_mutex_lock(&cur_philo.pd->print_lock);
+				printf("%li %i died\n", gettime(), cur_philo.id);
+				pthread_mutex_unlock(&cur_philo.pd->print_lock);
 				return (NULL);
 			}
 			cur_philo_id++;
@@ -48,7 +50,7 @@ void	*run_death_checker(void *philos_array)
 void	sim_death_checker(t_philosopher *philos)
 {
 	pthread_t	death_checker;
-	
+
 	usleep(1 * 1000);
 	pthread_create(&death_checker, NULL, run_death_checker, philos);
 	pthread_join(death_checker, NULL);

@@ -3,58 +3,76 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: rubennijhuis <rubennijhuis@student.coda      +#+                      #
+#    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2022/01/24 19:46:54 by rubennijhui   #+#    #+#                  #
-#    Updated: 2022/03/03 11:40:10 by rubennijhui   ########   odam.nl          #
+#    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
+#    Updated: 2022/03/10 14:53:59 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
+#============ General vars ===========#
 NAME := philo
-INCLUDE_DIR := ./include
-SRC_DIR := ./src
-BIN_DIR := ./bin
-LIB_DIR := ./libs
+INCLUDE_DIR := include
+SRC_DIR := src
+LIBS_DIR := libs
+OBJS_DIR := objs
 
-HEADERFILES := $(INCLUDE_DIR)/$(NAME).h
+#============ Input files ============#
+INC = -I $(INCLUDE_DIR)
 
-OBJS := src/main.o \
-		src/philo.o \
-		src/stop_sim.o \
-		src/utils/ft_atoi.o \
-		src/utils/ft_calloc.o \
-		src/utils/convert_time.o \
-		src/utils/initiate_data.o \
-		src/utils/close_threads.o \
-		src/utils/make_threads.o \
-		src/utils/validate_arguments.o \
+SRCS := main.c \
+		stop_sim.c \
+		initiate.c \
+		validate_arguments.c \
+		\
+		philo/philo.c \
+		philo/states.c \
+		\
+		utils/ft_calloc.c \
+		utils/ft_atoi.c \
+		utils/convert_time.c \
+		utils/print_state.c \
+		\
+		threads/close_threads.c \
+		threads/make_threads.c \
 
-CC=clang
-CFLAGS=-Wall -Wextra -g -fsanitize=address
-LDFLAGS=-g -fsanitize=address
+OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
-TEST_COMMAND = 5 1800 1200 1200
 
-obj/%.o:src/%.c ./include/philo.h
+#========= Command arguments =========#
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -g $(INC)
+LDFLAGS = 
+
+TEST_DATA = 5 800 200 200
+
+
+#=============== Rules ===============#
+objs/%.o:src/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) -o $@ $^
+	@echo "🔨 Compiling: $^"
+
+all: $(NAME)
 
 $(NAME):$(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) -o ./bin/philo
+	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@echo "✅ Built $(NAME)"
+
+get_src_files:
+	@find $(SRC_DIR) | cut -b 5-
 
 run:
-	$(BIN_DIR)/$(NAME) $(TEST_COMMAND)
+	./$(NAME) $(TEST_DATA)
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS_DIR)
 	@echo "🧹 Removing object files"
 
 fclean: clean
-	@rm -rf $(BIN_DIR)/$(NAME)
+	@rm -rf $(NAME)
 	@echo "🧹 Removing $(NAME) executable"
-
-all: $(NAME) clean
 
 re: fclean all
 
-.PHONY: run all clean fclean re
+.PHONY: all clean fclean re run

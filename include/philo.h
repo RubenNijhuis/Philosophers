@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:32:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/10 14:50:16 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <pthread.h>
 
 // Enums
-enum e_Bool { false, true };
+enum e_bool { false, true };
+enum e_state { sleeping, eating, pick_up_fork, died, thinking };
 
 // Program data
 typedef struct s_program_data
@@ -27,10 +28,11 @@ typedef struct s_program_data
 	long			time_to_eat;
 	long			time_to_sleep;
 	int				amount_meals;
-	enum e_Bool		stop_sim;
+	enum e_bool		stop_sim;
+	pthread_mutex_t	print_lock;
+	pthread_mutex_t	stop_sim_lock;
 	pthread_mutex_t	forks[200];
 	pthread_t		philo_threads[200];
-	struct timeval	*tv;
 }	t_program_data;
 
 // Philo struct
@@ -49,17 +51,26 @@ typedef struct s_philosopher
 void			initiate_data(t_program_data *pd, char **argv);
 void			initiate_table(t_program_data *pd);
 
+// General utils
+void			print_state(t_philosopher *philo, enum e_state state);
+
 // Operational Utils
 void			*ft_calloc(size_t count, size_t size);
 int				ft_atoi(const char *src);
 int				validate_arguments(int argc, char **argv);
 void			*run_philosopher(void *philosopher);
-long int		gettime(struct timeval *tv);
+long int		gettime(void);
 void			usleep_optimized(int ms);
+
+// Philo states
+void			start_eating(t_philosopher *philo);
+void			start_sleeping(t_philosopher *philo);
+void			start_thinking(t_philosopher *philo);
 
 // Thread utils
 void			close_threads(t_program_data *pd);
-void			make_philo_thread(t_philosopher *philos, t_program_data *pd, int id);
+void			make_philo_thread(t_philosopher *philos, \
+					t_program_data *pd, int id);
 
 // Mutex inits
 void			make_fork(t_program_data *pd, int id);
