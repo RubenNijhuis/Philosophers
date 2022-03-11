@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/10 14:50:16 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/11 14:37:29 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_program_data
 	long			time_to_eat;
 	long			time_to_sleep;
 	int				amount_meals;
+	long			start_time;
 	enum e_bool		stop_sim;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	stop_sim_lock;
@@ -71,6 +72,7 @@ void			start_thinking(t_philosopher *philo);
 void			close_threads(t_program_data *pd);
 void			make_philo_thread(t_philosopher *philos, \
 					t_program_data *pd, int id);
+enum e_bool		stop_sim(t_program_data *pd);
 
 // Mutex inits
 void			make_fork(t_program_data *pd, int id);
