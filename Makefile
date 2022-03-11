@@ -6,19 +6,28 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/03/10 14:53:59 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/03/11 16:18:43 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
+#=====================================#
 #============ General vars ===========#
+#=====================================#
+
 NAME := philo
 INCLUDE_DIR := include
 SRC_DIR := src
 LIBS_DIR := libs
 OBJS_DIR := objs
 
+
+
+#=====================================#
 #============ Input files ============#
-INC = -I $(INCLUDE_DIR)
+#=====================================#
+
+INCLUDE_LIBS = 
+INC = -I $(INCLUDE_DIR) $(INCLUDE_LIBS)
 
 SRCS := main.c \
 		stop_sim.c \
@@ -39,15 +48,23 @@ SRCS := main.c \
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 
+
+#=====================================#
 #========= Command arguments =========#
-CC = clang
+#=====================================#
+
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
 LDFLAGS = 
 
 TEST_DATA = 5 800 200 200
 
 
+
+#=====================================#
 #=============== Rules ===============#
+#=====================================#
+
 objs/%.o:src/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) -o $@ $^
