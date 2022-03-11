@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/10 14:22:14 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/11 16:19:06 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
+// printf("%li %i died - lte: %li // tod: %li -- dif: %li\n", gettime(), cur_philo.id, cur_philo.last_time_eaten, gettime(), gettime() - cur_philo.last_time_eaten - cur_philo.pd->time_to_die);
 void	*run_death_checker(void *philos_array)
 {
 	t_philosopher	*philos;
@@ -33,11 +34,13 @@ void	*run_death_checker(void *philos_array)
 		cur_philo = philos[cur_philo_id];
 		while (cur_philo_id < cur_philo.pd->amount_philo)
 		{
-			if ((gettime() - cur_philo.last_time_eaten) > time_to_die)
+			if (gettime() - cur_philo.last_time_eaten > time_to_die)
 			{
-				cur_philo.pd->stop_sim = true;
+				pthread_mutex_lock(&philos[0].pd->stop_sim_lock);
+				philos[0].pd->stop_sim = true;
+				pthread_mutex_unlock(&philos[0].pd->stop_sim_lock);
 				pthread_mutex_lock(&cur_philo.pd->print_lock);
-				printf("%li %i died\n", gettime(), cur_philo.id);
+				printf("%li %i died - lte: %li // tod: %li -- dif: %li\n", gettime(), cur_philo.id, cur_philo.last_time_eaten, gettime(), gettime() - cur_philo.last_time_eaten - cur_philo.pd->time_to_die);
 				pthread_mutex_unlock(&cur_philo.pd->print_lock);
 				return (NULL);
 			}
@@ -51,7 +54,6 @@ void	sim_death_checker(t_philosopher *philos)
 {
 	pthread_t	death_checker;
 
-	usleep(1 * 1000);
 	pthread_create(&death_checker, NULL, run_death_checker, philos);
 	pthread_join(death_checker, NULL);
 }
