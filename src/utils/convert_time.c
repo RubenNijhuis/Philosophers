@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/23 13:52:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/10 13:27:12 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/11 18:07:29 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,5 @@ long	gettime(void)
 
 	gettimeofday(&tv, NULL);
 	ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	ms -= 1646394900000;
 	return (ms);
-}
-
-void	usleep_optimized(int ms)
-{
-	int	wait_times;
-	int	current_time;
-
-	wait_times = ms / 10;
-	current_time = 0;
-	while (current_time < wait_times)
-	{
-		usleep(1000);
-		current_time++;
-	}
 }

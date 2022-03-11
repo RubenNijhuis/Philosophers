@@ -6,25 +6,48 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 16:22:01 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/11 18:09:40 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
-#include <stdio.h>
 
+void	start_activity(t_philosopher *philo, int duration)
+{
+	long	start_time;
+
+	start_time = gettime();
+	while (gettime() - start_time < duration)
+	{
+		if (stop_sim(philo->pd) == true)
+			break ;
+	}
+}
+
+/*
+ * Subfunctionf or philo
+ * will sleep for the specified time
+*/
 void	start_sleeping(t_philosopher *philo)
 {
 	print_state(philo, sleeping);
-	usleep(philo->pd->time_to_sleep * 1000);
+	start_activity(philo, philo->pd->time_to_sleep);
 }
 
+/*
+ * Subfunction for philo
+ * will think for a bit and move on
+*/
 void	start_thinking(t_philosopher *philo)
 {
 	print_state(philo, thinking);
 }
 
+/*
+ * Subfunction for philo
+ * uses the mutexes to claim forks
+*/
 void	pick_up_forks(t_philosopher *philo)
 {
 	if (philo->id % 2 == 0)
@@ -43,22 +66,15 @@ void	pick_up_forks(t_philosopher *philo)
 	}
 }
 
+/*
+ * Philo will pick up their forks and eat
+ * records: last_time_eaten
+*/
 void	start_eating(t_philosopher *philo)
 {
-	int	times_waited;
-
-	times_waited = 0;
 	pick_up_forks(philo);
 	print_state(philo, eating);
-	while (1)
-	{
-		if (times_waited * 1000 >= philo->pd->time_to_eat * 1000)
-			break ;
-		if (stop_sim(philo->pd) == true)
-			break ;
-		times_waited++;
-		usleep(1000);
-	}
+	start_activity(philo, philo->pd->time_to_eat);
 	philo->last_time_eaten = gettime();
 	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);

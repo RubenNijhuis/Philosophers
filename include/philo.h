@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 14:37:29 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/11 18:00:46 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int				ft_atoi(const char *src);
 int				validate_arguments(int argc, char **argv);
 void			*run_philosopher(void *philosopher);
 long int		gettime(void);
-void			usleep_optimized(int ms);
 
 // Philo states
 void			start_eating(t_philosopher *philo);
