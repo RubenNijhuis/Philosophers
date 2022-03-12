@@ -6,14 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 18:09:40 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/12 09:31:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
 
-void	start_activity(t_philosopher *philo, int duration)
+void	start_action(t_philosopher *philo, int duration)
 {
 	long	start_time;
 
@@ -29,17 +29,17 @@ void	start_activity(t_philosopher *philo, int duration)
  * Subfunctionf or philo
  * will sleep for the specified time
 */
-void	start_sleeping(t_philosopher *philo)
+void	action_sleeping(t_philosopher *philo)
 {
 	print_state(philo, sleeping);
-	start_activity(philo, philo->pd->time_to_sleep);
+	start_action(philo, philo->pd->time_to_sleep);
 }
 
 /*
  * Subfunction for philo
  * will think for a bit and move on
 */
-void	start_thinking(t_philosopher *philo)
+void	action_thinking(t_philosopher *philo)
 {
 	print_state(philo, thinking);
 }
@@ -70,11 +70,11 @@ void	pick_up_forks(t_philosopher *philo)
  * Philo will pick up their forks and eat
  * records: last_time_eaten
 */
-void	start_eating(t_philosopher *philo)
+void	action_eating(t_philosopher *philo)
 {
 	pick_up_forks(philo);
 	print_state(philo, eating);
-	start_activity(philo, philo->pd->time_to_eat);
+	start_action(philo, philo->pd->time_to_eat);
 	philo->last_time_eaten = gettime();
 	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);

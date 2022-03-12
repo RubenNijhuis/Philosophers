@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/11 18:09:18 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/11 23:49:20 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	*run_philosopher(void *philosopher)
 	philo = (t_philosopher *)philosopher;
 	while (!stop_sim(philo->pd))
 	{
-		start_eating(philo);
-		start_sleeping(philo);
-		start_thinking(philo);
+		action_eating(philo);
+		action_sleeping(philo);
+		action_thinking(philo);
 	}
 	return (NULL);
 }

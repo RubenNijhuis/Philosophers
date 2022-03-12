@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/03/11 16:18:43 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/03/12 09:23:32 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS := main.c \
 		utils/ft_atoi.c \
 		utils/convert_time.c \
 		utils/print_state.c \
+		utils/is_only_number.c \
 		\
 		threads/close_threads.c \
 		threads/make_threads.c \
@@ -73,7 +74,7 @@ objs/%.o:src/%.c
 all: $(NAME)
 
 $(NAME):$(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(OBJS) $(LDFLAGS) -pthread -o $(NAME)
 	@echo "✅ Built $(NAME)"
 
 get_src_files:
