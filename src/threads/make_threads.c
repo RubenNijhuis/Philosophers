@@ -6,13 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:08:33 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/12 10:14:00 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
-#include <unistd.h>
 #include <stdlib.h>
 
 void	make_fork(t_program_data *pd, int id)

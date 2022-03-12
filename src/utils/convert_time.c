@@ -6,12 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/23 13:52:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 18:07:29 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/12 10:13:03 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
-#include <unistd.h>
 
 long	gettime(void)
 {

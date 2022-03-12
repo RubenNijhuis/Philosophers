@@ -6,13 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:11:43 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/12 10:12:40 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
-#include <unistd.h>
 
 int	main(int argc, char **argv)
 {

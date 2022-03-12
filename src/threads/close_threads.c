@@ -6,12 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 09:42:36 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/12 10:13:48 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
 
 void	destroy_mutexes(t_program_data *pd)
 {

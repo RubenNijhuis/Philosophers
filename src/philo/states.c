@@ -6,12 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 09:31:17 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/12 10:14:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
 
 void	start_action(t_philosopher *philo, int duration)
 {

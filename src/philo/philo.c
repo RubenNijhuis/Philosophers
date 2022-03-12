@@ -6,12 +6,11 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/11 23:49:20 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/12 10:14:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
 
 enum e_bool	stop_sim(t_program_data *pd)
 {

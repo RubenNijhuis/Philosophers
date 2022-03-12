@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/12 10:10:28 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/12 10:12:52 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // It also checks whether the philo's have eaten
 
 #include "philo.h"
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 

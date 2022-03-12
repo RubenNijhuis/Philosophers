@@ -6,11 +6,10 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:47:33 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/01/27 11:58:00 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/12 10:13:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
 
 static void	*ft_memset(void *dest, int val, size_t len)

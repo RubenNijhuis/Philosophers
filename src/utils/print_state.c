@@ -6,13 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 17:43:36 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/12 10:13:35 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
-#include <unistd.h>
 
 void	print_state(t_philosopher *philo, enum e_state state)
 {
