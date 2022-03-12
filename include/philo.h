@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 18:00:46 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/12 09:38:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_philosopher
 // Data inits
 void			initiate_data(t_program_data *pd, char **argv);
 void			initiate_table(t_program_data *pd);
+enum e_bool		is_only_number(char *str);
 
 // General utils
 void			print_state(t_philosopher *philo, enum e_state state);
@@ -58,20 +59,21 @@ void			print_state(t_philosopher *philo, enum e_state state);
 // Operational Utils
 void			*ft_calloc(size_t count, size_t size);
 int				ft_atoi(const char *src);
-int				validate_arguments(int argc, char **argv);
+enum			e_bool validate_arguments(int argc, char **argv);
 void			*run_philosopher(void *philosopher);
 long int		gettime(void);
 
 // Philo states
-void			start_eating(t_philosopher *philo);
-void			start_sleeping(t_philosopher *philo);
-void			start_thinking(t_philosopher *philo);
+void			action_eating(t_philosopher *philo);
+void			action_sleeping(t_philosopher *philo);
+void			action_thinking(t_philosopher *philo);
 
 // Thread utils
 void			close_threads(t_program_data *pd);
 void			make_philo_thread(t_philosopher *philos, \
 					t_program_data *pd, int id);
 enum e_bool		stop_sim(t_program_data *pd);
+void			destroy_mutexes(t_program_data *pd);
 
 // Mutex inits
 void			make_fork(t_program_data *pd, int id);

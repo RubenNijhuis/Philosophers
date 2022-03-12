@@ -6,13 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/11 14:05:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/12 10:08:33 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 void	make_fork(t_program_data *pd, int id)
 {
@@ -33,5 +34,6 @@ void	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 	if (id == 0)
 		philo->left_fork = pd->amount_philo - 1;
 	philos[id] = *philo;
+	free(philo);
 	pthread_create(&pd->philo_threads[id], NULL, run_philosopher, philo);
 }
