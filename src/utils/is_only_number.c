@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   validate_arguments.c                               :+:    :+:            */
+/*   is_only_number.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/27 20:03:05 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/12 09:22:39 by rubennijhui   ########   odam.nl         */
+/*   Created: 2022/03/12 09:13:50 by rubennijhui   #+#    #+#                 */
+/*   Updated: 2022/03/12 09:18:04 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-enum e_bool	validate_arguments(int argc, char **argv)
+enum e_bool	is_only_number(char *str)
 {
-	if (argc != 5 && argc != 6)
-		return (false);
-	if (is_only_number(argv[1]) == false)
-		return (false);
-	if (is_only_number(argv[2]) == false)
-		return (false);
-	if (is_only_number(argv[3]) == false)
-		return (false);
-	if (is_only_number(argv[4]) == false)
-		return (false);
-	if (argc == 6 && is_only_number(argv[4]) == false)
-		return (false);
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (i > 0 && (str[i] == '-'))
+			return (false);
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (false);
+		i++;
+	}
 	return (true);
 }
