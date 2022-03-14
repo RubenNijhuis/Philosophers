@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/03/12 09:23:32 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/03/14 10:28:23 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
-LDFLAGS = 
+# LDFLAGS = -fsanitize=thread
 
 TEST_DATA = 5 800 200 200
 

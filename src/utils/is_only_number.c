@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   is_only_number.c                                    :+:    :+:            */
+/*   is_only_number.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
+/*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/12 09:13:50 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/12 09:18:04 by rubennijhui   ########   odam.nl         */
+/*   Created: 2022/03/14 09:40:18 by rnijhuis      #+#    #+#                 */
+/*   Updated: 2022/03/14 09:40:19 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

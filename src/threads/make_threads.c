@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:14:00 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/14 10:13:10 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,12 @@ void	make_fork(t_program_data *pd, int id)
 
 void	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 {
-	t_philosopher	*philo;
-
-	philo = ft_calloc(1, sizeof(t_philosopher));
-	philo->pd = pd;
-	philo->id = id + 1;
-	philo->start_time = gettime();
-	philo->last_time_eaten = gettime();
-	philo->right_fork = id;
-	philo->left_fork = id - 1;
+	philos[id].pd = pd;
+	philos[id].id = id + 1;
+	philos[id].last_time_eaten = gettime();
+	philos[id].right_fork = id;
+	philos[id].left_fork = id - 1;
 	if (id == 0)
-		philo->left_fork = pd->amount_philo - 1;
-	philos[id] = *philo;
-	free(philo);
-	pthread_create(&pd->philo_threads[id], NULL, run_philosopher, philo);
+		philos[id].left_fork = pd->amount_philo - 1;
+	pthread_create(&pd->philo_threads[id], NULL, run_philosopher, &philos[id]);
 }

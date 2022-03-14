@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   close_threads.c                                    :+:    :+:            */
+/*   colors.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 09:40:35 by rnijhuis      ########   odam.nl         */
+/*   Created: 2022/03/14 10:27:08 by rnijhuis      #+#    #+#                 */
+/*   Updated: 2022/03/14 10:27:09 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#ifndef COLOURS_H
+# define COLOURS_H
 
-void	destroy_mutexes(t_program_data *pd)
-{
-	int	i;
+# define RED   "\x1B[31m"
+# define GRN   "\x1B[32m"
+# define YEL   "\x1B[33m"
+# define BLU   "\x1B[34m"
+# define MAG   "\x1B[35m"
+# define CYN   "\x1B[36m"
+# define WHT   "\x1B[37m"
+# define RESET "\x1B[0m"
 
-	i = 0;
-	while (i < pd->amount_philo)
-	{
-		pthread_mutex_destroy(&pd->forks[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&pd->stop_sim_lock);
-	pthread_mutex_destroy(&pd->print_lock);
-}
-
-void	close_threads(t_program_data *pd)
-{
-	int	i;
-
-	i = 0;
-	while (i < pd->amount_philo)
-	{
-		pthread_join(pd->philo_threads[i], NULL);
-		i++;
-	}
-}
+#endif

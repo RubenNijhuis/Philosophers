@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 09:38:13 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/14 09:39:58 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_program_data
 typedef struct s_philosopher
 {
 	int				id;
-	long			start_time;
 	long			last_time_eaten;
 	int				times_eaten;
 	int				left_fork;
@@ -59,7 +58,7 @@ void			print_state(t_philosopher *philo, enum e_state state);
 // Operational Utils
 void			*ft_calloc(size_t count, size_t size);
 int				ft_atoi(const char *src);
-enum			e_bool validate_arguments(int argc, char **argv);
+enum e_bool		validate_arguments(int argc, char **argv);
 void			*run_philosopher(void *philosopher);
 long int		gettime(void);
 

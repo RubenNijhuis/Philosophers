@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:14:13 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/14 10:50:47 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	action_eating(t_philosopher *philo)
 {
 	pick_up_forks(philo);
 	print_state(philo, eating);
-	start_action(philo, philo->pd->time_to_eat);
 	philo->last_time_eaten = gettime();
+	start_action(philo, philo->pd->time_to_eat);
 	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
 }
