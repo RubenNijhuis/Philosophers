@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 16:04:11 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/14 17:19:46 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ enum e_bool	start_action(t_philosopher *philo, int duration)
 	while (gettime() - start_time < duration)
 	{
 		if (stop_sim(philo) == true)
+		{
+			pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
+			pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
 			return (false);
-		usleep(500);
+		}
+		usleep(1000);
 	}
 	return (true);
 }

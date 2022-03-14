@@ -6,13 +6,9 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/14 16:07:50 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/14 17:26:17 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Seperate thread for checking death of philo_threads
-// It loops constantly checking if all the philo's are dead
-// It also checks whether the philo's have eaten
 
 #include "philo.h"
 #include "colors.h"
@@ -53,8 +49,8 @@ enum e_bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 
 enum e_bool	all_full(t_philosopher *philos, t_program_data *pd)
 {
-	int				i;
-	int				amount_full;
+	int	i;
+	int	amount_full;
 
 	i = 0;
 	amount_full = 0;
@@ -95,9 +91,9 @@ void	*run_death_checker(void *philos_array)
 			if (is_philo_dead(&philos[i], pd))
 				return (NULL);
 			i++;
+			if (all_full(philos, pd))
+				return (NULL);
 		}
-		if (all_full(philos, pd))
-			return (NULL);
 	}
 	return (NULL);
 }

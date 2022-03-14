@@ -6,12 +6,12 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/14 14:45:29 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/14 17:07:28 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
+#include <unistd.h>
 
 enum e_bool	stop_sim(t_philosopher *philo)
 {
@@ -40,6 +40,8 @@ void	*run_philosopher(void *philosopher)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)philosopher;
+	if (philo->id % 1 == 0)
+		usleep(philo->pd->time_to_eat);
 	while (!stop_sim(philo))
 	{
 		if (action_eating(philo) == false)
