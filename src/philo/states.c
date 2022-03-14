@@ -6,34 +6,37 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 11:30:27 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/14 16:04:11 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
 
-void	start_action(t_philosopher *philo, int duration)
+enum e_bool	start_action(t_philosopher *philo, int duration)
 {
 	long	start_time;
 
 	start_time = gettime();
 	while (gettime() - start_time < duration)
 	{
-		if (stop_sim(philo->pd) == true)
-			break ;
-		usleep(1000);
+		if (stop_sim(philo) == true)
+			return (false);
+		usleep(500);
 	}
+	return (true);
 }
 
 /*
  * Subfunctionf or philo
  * will sleep for the specified time
 */
-void	action_sleeping(t_philosopher *philo)
+enum e_bool	action_sleeping(t_philosopher *philo)
 {
 	print_state(philo, sleeping);
-	start_action(philo, philo->pd->time_to_sleep);
+	if (start_action(philo, philo->pd->time_to_sleep) == false)
+		return (false);
+	return (1);
 }
 
 /*
@@ -71,12 +74,17 @@ void	pick_up_forks(t_philosopher *philo)
  * Philo will pick up their forks and eat
  * records: last_time_eaten
 */
-void	action_eating(t_philosopher *philo)
+enum e_bool	action_eating(t_philosopher *philo)
 {
 	pick_up_forks(philo);
 	print_state(philo, eating);
-	start_action(philo, philo->pd->time_to_eat);
 	philo->last_time_eaten = gettime();
+	pthread_mutex_lock(&philo->amount_meals_lock);
+	philo->amount_meals_eaten++;
+	pthread_mutex_unlock(&philo->amount_meals_lock);
+	if (start_action(philo, philo->pd->time_to_eat) == false)
+		return (false);
 	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
+	return (true);
 }

@@ -6,24 +6,26 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 09:40:35 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/14 14:26:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	destroy_mutexes(t_program_data *pd)
+void	destroy_mutexes(t_philosopher *philos)
 {
 	int	i;
 
 	i = 0;
-	while (i < pd->amount_philo)
+	pthread_mutex_destroy(&philos[i].pd->stop_sim_lock);
+	pthread_mutex_destroy(&philos[i].pd->print_lock);
+	while (i < philos[i].pd->amount_philo)
 	{
-		pthread_mutex_destroy(&pd->forks[i]);
+		pthread_mutex_destroy(&philos[i].pd->forks[i]);
+		pthread_mutex_destroy(&philos[i].amount_meals_lock);
+		pthread_mutex_destroy(&philos[i].stop_sim_lock_local);
 		i++;
 	}
-	pthread_mutex_destroy(&pd->stop_sim_lock);
-	pthread_mutex_destroy(&pd->print_lock);
 }
 
 void	close_threads(t_program_data *pd)

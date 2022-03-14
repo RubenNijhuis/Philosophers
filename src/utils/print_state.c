@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 10:31:58 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/03/14 13:23:18 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ void	print_state(t_philosopher *philo, enum e_state state)
 	if (philo->pd->stop_sim == false)
 	{
 		cur_time = gettime() - philo->pd->start_time;
+		printf("%li %i ", cur_time, id);
 		if (state == sleeping)
-			printf(MAG "%li %i is sleeping\n" RESET, cur_time, id);
+			printf(MAG "is sleeping\n" RESET);
 		else if (state == eating)
-			printf(GRN "%li %i is eating\n" RESET, cur_time, id);
+			printf(GRN "is eating\n" RESET);
 		else if (state == pick_up_fork)
-			printf(YEL "%li %i has taken a fork\n" RESET, cur_time, id);
+			printf(YEL "has taken a fork\n" RESET);
 		else if (state == thinking)
-			printf(BLU "%li %i is thinking\n" RESET, cur_time, id);
+			printf(BLU "is thinking\n" RESET);
 	}
 	pthread_mutex_unlock(&philo->pd->print_lock);
 }

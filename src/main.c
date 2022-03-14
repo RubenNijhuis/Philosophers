@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:12:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/03/14 14:27:09 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ int	main(int argc, char **argv)
 	initiate_data(&program_data, argv);
 	initiate_table(&program_data);
 	close_threads(&program_data);
-	destroy_mutexes(&program_data);
 	return (0);
 }
