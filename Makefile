@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/03/14 10:28:23 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/03/14 11:09:12 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,6 @@ INCLUDE_DIR := include
 SRC_DIR := src
 LIBS_DIR := libs
 OBJS_DIR := objs
-
-
 
 #=====================================#
 #============ Input files ============#
@@ -48,8 +46,6 @@ SRCS := main.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
-
-
 #=====================================#
 #========= Command arguments =========#
 #=====================================#
@@ -59,8 +55,6 @@ CFLAGS = -Wall -Wextra -Werror -g $(INC)
 # LDFLAGS = -fsanitize=thread
 
 TEST_DATA = 5 800 200 200
-
-
 
 #=====================================#
 #=============== Rules ===============#
