@@ -12,7 +12,7 @@ And watch as the philosophers dine and enjoy a nice meal
 ```
 /- Philo
     /- include
-        # files lke .h can be put here
+        # files like .h can be put here
     /- libs
         # included libraries like libft or get_next_line are put here
     /- src
