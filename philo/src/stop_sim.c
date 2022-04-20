@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/20 13:58:33 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/20 17:32:04 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	print_death(t_program_data *pd, t_philosopher *philo)
 {
 	pthread_mutex_lock(&pd->print_lock);
-	printf(RED "%li %i died\n" RESET, gettime() - pd->start_time, philo->id);
+	printf("%011li %i died\n", gettime() - pd->start_time, philo->id);
 	pthread_mutex_unlock(&pd->print_lock);
 }
 
