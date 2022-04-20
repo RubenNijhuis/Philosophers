@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/03/14 17:07:28 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/20 13:58:36 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,14 @@ void	*run_philosopher(void *philosopher)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)philosopher;
-	if (philo->id % 1 == 0)
-		usleep(philo->pd->time_to_eat);
+	if (philo->id % 2 == 1)
+		usleep(100);
+	if (philo->pd->amount_philo == 1)
+	{
+		print_state(philo, pick_up_fork);
+		usleep(philo->pd->time_to_die);
+		return (NULL);
+	}
 	while (!stop_sim(philo))
 	{
 		if (action_eating(philo) == false)

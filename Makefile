@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/03/14 11:09:12 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/03/14 17:52:18 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,10 @@ OBJS_DIR := objs
 #============ Input files ============#
 #=====================================#
 
-INCLUDE_LIBS = 
+LIB_HEADERS =
+LIB_HEADERS_INCLUDE =
+LIB_ARCHIVES =
+
 INC = -I $(INCLUDE_DIR) $(INCLUDE_LIBS)
 
 SRCS := main.c \
@@ -60,10 +63,10 @@ TEST_DATA = 5 800 200 200
 #=============== Rules ===============#
 #=====================================#
 
-objs/%.o:src/%.c
+objs/%.o:src/*%.c $(INCLUDE_DIR)/* $(LIB_HEADERS)
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) -o $@ $^
-	@echo "🔨 Compiling: $^"
+	@$(CC) -c $(CFLAGS) -o $@ $<
+	@echo "🔨 Compiling: $<"
 
 all: $(NAME)
 

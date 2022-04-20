@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 17:19:46 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/20 14:27:28 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ enum e_bool	start_action(t_philosopher *philo, int duration)
 			pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
 			return (false);
 		}
-		usleep(1000);
+		usleep(500);
 	}
 	return (true);
 }
@@ -40,7 +40,7 @@ enum e_bool	action_sleeping(t_philosopher *philo)
 	print_state(philo, sleeping);
 	if (start_action(philo, philo->pd->time_to_sleep) == false)
 		return (false);
-	return (1);
+	return (true);
 }
 
 /*
@@ -84,10 +84,10 @@ enum e_bool	action_eating(t_philosopher *philo)
 	print_state(philo, eating);
 	philo->last_time_eaten = gettime();
 	pthread_mutex_lock(&philo->amount_meals_lock);
-	philo->amount_meals_eaten++;
 	pthread_mutex_unlock(&philo->amount_meals_lock);
 	if (start_action(philo, philo->pd->time_to_eat) == false)
 		return (false);
+	philo->amount_meals_eaten++;
 	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
 	return (true);
