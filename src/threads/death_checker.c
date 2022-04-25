@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 18:13:59 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 22:17:43 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_stop_sim_lock(t_program_data *pd)
 	pthread_mutex_unlock(&pd->stop_sim_lock);
 }
 
-enum e_bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
+bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 {
 	pthread_mutex_lock(&philo->stop_sim_lock_local);
 	if (philo->stop_sim == false)
@@ -43,7 +43,7 @@ enum e_bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 	return (false);
 }
 
-enum e_bool	all_full(t_philosopher *philos, t_program_data *pd)
+bool	all_full(t_philosopher *philos, t_program_data *pd)
 {
 	int	i;
 	int	amount_full;

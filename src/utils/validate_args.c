@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   is_only_number.c                                   :+:    :+:            */
+/*   validate_args.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/14 09:40:18 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 18:02:03 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 22:17:43 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static enum e_bool	is_only_number(char *str)
+static bool	is_only_number(char *str)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static enum e_bool	is_only_number(char *str)
 	return (true);
 }
 
-enum e_bool	validate_arguments(int argc, char **argv)
+bool	validate_arguments(int argc, char **argv)
 {
 	int	i;
 

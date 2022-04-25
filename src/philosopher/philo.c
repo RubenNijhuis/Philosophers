@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 18:15:17 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 22:17:43 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <unistd.h> // usleep
 
-enum e_bool	stop_sim(t_philosopher *philo)
+bool	stop_sim(t_philosopher *philo)
 {
 	t_program_data	*pd;
 

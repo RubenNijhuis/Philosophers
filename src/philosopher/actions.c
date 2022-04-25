@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 18:15:08 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 22:17:43 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <unistd.h> // usleep
 
-enum e_bool	start_action(t_philosopher *philo, int duration)
+bool	start_action(t_philosopher *philo, int duration)
 {
 	long	start_time;
 
@@ -36,7 +36,7 @@ enum e_bool	start_action(t_philosopher *philo, int duration)
  * Subfunctionf or philo
  * will sleep for the specified time
 */
-enum e_bool	action_sleeping(t_philosopher *philo)
+bool	action_sleeping(t_philosopher *philo)
 {
 	print_state(philo, sleeping);
 	if (start_action(philo, philo->pd->time_to_sleep) == false)
@@ -79,7 +79,7 @@ void	pick_up_forks(t_philosopher *philo)
  * Philo will pick up their forks and eat
  * records: last_time_eaten
 */
-enum e_bool	action_eating(t_philosopher *philo)
+bool	action_eating(t_philosopher *philo)
 {
 	pick_up_forks(philo);
 	print_state(philo, eating);
