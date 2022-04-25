@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   states.c                                           :+:    :+:            */
+/*   actions.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 10:44:37 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 18:15:08 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
+
+#include <unistd.h> // usleep
 
 enum e_bool	start_action(t_philosopher *philo, int duration)
 {

@@ -6,13 +6,12 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 16:47:21 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 18:13:59 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 void	print_death(t_program_data *pd, t_philosopher *philo)
 {
@@ -54,7 +53,8 @@ enum e_bool	all_full(t_philosopher *philos, t_program_data *pd)
 	while (i < pd->amount_philo)
 	{
 		pthread_mutex_lock(&philos[i].amount_meals_lock);
-		if (pd->amount_meals > 0 && philos[i].amount_meals_eaten == pd->amount_meals)
+		if (pd->amount_meals > 0 && \
+			philos[i].amount_meals_eaten == pd->amount_meals)
 		{
 			pthread_mutex_lock(&philos[i].stop_sim_lock_local);
 			philos[i].stop_sim = true;

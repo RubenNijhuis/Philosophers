@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/04/25 16:08:02 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/04/25 18:06:19 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,20 +32,19 @@ INC = -I $(INCLUDE_DIR) $(INCLUDE_LIBS)
 
 SRCS := main.c \
 		initiate.c \
-		death_checker.c \
-		validate_arguments.c \
 		\
-		philo/philo.c \
-		philo/states.c \
+		philosopher/philo.c \
+		philosopher/actions.c \
 		\
+		utils/gettime.c \
 		utils/ft_atoi.c \
 		utils/ft_calloc.c \
 		utils/print_state.c \
-		utils/convert_time.c \
-		utils/is_only_number.c \
+		utils/validate_args.c \
 		\
 		threads/make_threads.c \
-		threads/close_threads.c \
+		threads/death_checker.c \
+		threads/destroy_mutexes.c \
 
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 

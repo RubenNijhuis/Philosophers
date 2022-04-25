@@ -6,14 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 16:44:21 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 18:15:33 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
+# include <pthread.h> // pthread_mutex_t 
 
 // Enums
 enum e_bool { false, true };
@@ -55,7 +55,6 @@ int				initiate_table(t_program_data *pd, t_philosopher *philos);
 
 // Utils
 void			print_state(t_philosopher *philo, enum e_state state);
-enum e_bool		is_only_number(char *str);
 void			*ft_calloc(size_t count, size_t size);
 int				ft_atoi(const char *src);
 enum e_bool		validate_arguments(int argc, char **argv);
@@ -73,7 +72,8 @@ void			close_threads(t_program_data *pd);
 int				make_philo_thread(t_philosopher *philos, \
 					t_program_data *pd, int id);
 enum e_bool		stop_sim(t_philosopher *philo);
-int				destroy_mutexes(t_philosopher *philos, pthread_mutex_t stop_sim_lock, pthread_mutex_t print_lock);
+int				destroy_mutexes(t_philosopher *philos, \
+					pthread_mutex_t stop_sim_lock, pthread_mutex_t print_lock);
 
 // Simulation goal checks
 void			*run_death_checker(void *philos_array);

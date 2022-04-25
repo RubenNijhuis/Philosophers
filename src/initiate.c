@@ -6,13 +6,17 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 16:46:42 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 18:10:23 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
 
+/*
+	Initiates the basic data that every philo needs
+	and puts it into the program data struct
+	Also initializes the mutexes for global use
+ */
 int	initiate_data(t_program_data *pd, char **argv)
 {
 	pd->amount_philo = ft_atoi(argv[1]);
@@ -29,6 +33,10 @@ int	initiate_data(t_program_data *pd, char **argv)
 	return (1);
 }
 
+/*
+	Initiates the table bits, philosopher threads and forks
+	As well as the death checker thread
+ */
 int	initiate_table(t_program_data *pd, t_philosopher *philos)
 {
 	int	i;

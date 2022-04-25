@@ -6,13 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 16:22:10 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 18:13:22 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
-
 
 int	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 {
@@ -28,9 +26,22 @@ int	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 		return (0);
 	if (id == 0)
 		philos[id].left_fork = pd->amount_philo - 1;
-	if (pthread_create(&pd->philo_threads[id], NULL, run_philosopher, &philos[id]) != 0)
+	if (pthread_create(&pd->philo_threads[id], NULL, \
+		run_philosopher, &philos[id]) != 0)
 		return (0);
 	return (1);
+}
+
+void	close_threads(t_program_data *pd)
+{
+	int	i;
+
+	i = 0;
+	while (i < pd->amount_philo)
+	{
+		pthread_join(pd->philo_threads[i], NULL);
+		i++;
+	}
 }
 
 int	create_sim_death_checker(t_philosopher *philos)

@@ -6,12 +6,13 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 10:52:21 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 18:15:17 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
+
+#include <unistd.h> // usleep
 
 enum e_bool	stop_sim(t_philosopher *philo)
 {
