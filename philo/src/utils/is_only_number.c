@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/14 09:40:18 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/14 09:40:19 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 15:53:37 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ enum e_bool	is_only_number(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (i > 0 && (str[i] == '-'))
-			return (false);
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (false);
 		i++;

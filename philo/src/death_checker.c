@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   stop_sim.c                                         :+:    :+:            */
+/*   death_checker.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 10:56:12 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 16:47:21 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ enum e_bool	all_full(t_philosopher *philos, t_program_data *pd)
 	while (i < pd->amount_philo)
 	{
 		pthread_mutex_lock(&philos[i].amount_meals_lock);
-		if (philos[i].amount_meals_eaten == pd->amount_meals)
+		if (pd->amount_meals > 0 && philos[i].amount_meals_eaten == pd->amount_meals)
 		{
 			pthread_mutex_lock(&philos[i].stop_sim_lock_local);
 			philos[i].stop_sim = true;
@@ -91,9 +91,9 @@ void	*run_death_checker(void *philos_array)
 				return (NULL);
 			}
 			i++;
-			if (all_full(philos, pd))
-				return (NULL);
 		}
+		if (all_full(philos, pd))
+			return (NULL);
 	}
 	return (NULL);
 }

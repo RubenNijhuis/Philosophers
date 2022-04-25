@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:47:33 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:13:17 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/25 16:31:12 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	*ft_memset(void *dest, int val, size_t len)
 	return (dest);
 }
 
-static void	*ft_bzero(void *ptr, size_t len)
+void	*ft_bzero(void *ptr, size_t len)
 {
 	return (ft_memset(ptr, 0, len));
 }

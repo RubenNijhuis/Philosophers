@@ -6,41 +6,43 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 10:30:41 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 16:46:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdlib.h>
 
-void	initiate_data(t_program_data *pd, char **argv)
+int	initiate_data(t_program_data *pd, char **argv)
 {
 	pd->amount_philo = ft_atoi(argv[1]);
 	pd->time_to_die = ft_atoi(argv[2]);
 	pd->time_to_eat = ft_atoi(argv[3]);
 	pd->time_to_sleep = ft_atoi(argv[4]);
-	if (argv[5] != '\0')
+	if (argv[5])
 		pd->amount_meals = ft_atoi(argv[5]);
 	pd->start_time = gettime();
-	pthread_mutex_init(&pd->print_lock, NULL);
-	pthread_mutex_init(&pd->stop_sim_lock, NULL);
+	if (pthread_mutex_init(&pd->print_lock, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&pd->stop_sim_lock, NULL) != 0)
+		return (0);
+	return (1);
 }
 
-void	initiate_table(t_program_data *pd)
+int	initiate_table(t_program_data *pd, t_philosopher *philos)
 {
-	int				i;
-	t_philosopher	*philos;
+	int	i;
 
 	i = 0;
-	philos = ft_calloc(pd->amount_philo, sizeof(t_philosopher));
 	while (i < pd->amount_philo)
 	{
-		make_fork(pd, i);
-		make_philo_thread(philos, pd, i);
+		if (pthread_mutex_init(&pd->forks[i], NULL) != 0)
+			return (0);
+		if (!make_philo_thread(philos, pd, i))
+			return (0);
 		i++;
 	}
-	create_sim_death_checker(philos);
-	close_threads(pd);
-	destroy_mutexes(philos);
-	free(philos);
+	if (!create_sim_death_checker(philos))
+		return (0);
+	return (1);
 }

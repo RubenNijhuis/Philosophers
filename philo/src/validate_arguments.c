@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 20:03:05 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/20 14:08:54 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 15:55:24 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ enum e_bool	validate_arguments(int argc, char **argv)
 	if (is_only_number(argv[3]) == false)
 		return (false);
 	if (is_only_number(argv[4]) == false)
-		return (false);
-	if (argc == 6 && is_only_number(argv[4]) == false)
 		return (false);
 	return (true);
 }
