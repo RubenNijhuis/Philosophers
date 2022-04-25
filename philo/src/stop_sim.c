@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 09:36:06 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 10:56:12 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	print_death(t_program_data *pd, t_philosopher *philo)
 {
 	pthread_mutex_lock(&pd->print_lock);
 	printf("%011li %i died\n", gettime() - pd->start_time, philo->id);
-	pthread_mutex_unlock(&pd->print_lock);
 }
 
 void	set_stop_sim_lock(t_program_data *pd)
@@ -33,8 +32,7 @@ enum e_bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 	pthread_mutex_lock(&philo->stop_sim_lock_local);
 	if (philo->stop_sim == false)
 	{
-		if ((gettime() - pd->start_time) - \
-			(philo->last_time_eaten - pd->start_time) > pd->time_to_die)
+		if ((gettime() - philo->last_time_eaten) > pd->time_to_die)
 		{
 			print_death(pd, philo);
 			set_stop_sim_lock(pd);
@@ -88,7 +86,10 @@ void	*run_death_checker(void *philos_array)
 		while (i < pd->amount_philo)
 		{
 			if (is_philo_dead(&philos[i], pd))
+			{
+				pthread_mutex_unlock(&pd->print_lock);
 				return (NULL);
+			}
 			i++;
 			if (all_full(philos, pd))
 				return (NULL);
