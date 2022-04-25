@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/20 17:10:06 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 10:29:26 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,4 @@ void	create_sim_death_checker(t_philosopher *philos)
 
 	pthread_create(&death_checker, NULL, run_death_checker, philos);
 	pthread_join(death_checker, NULL);
-	// destroy_mutexes(philos);
-	// free(philos);
 }

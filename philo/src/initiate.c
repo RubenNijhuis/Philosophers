@@ -6,12 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/20 14:03:53 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 10:30:41 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <sys/time.h>
+#include <stdlib.h>
 
 void	initiate_data(t_program_data *pd, char **argv)
 {
@@ -40,4 +40,7 @@ void	initiate_table(t_program_data *pd)
 		i++;
 	}
 	create_sim_death_checker(philos);
+	close_threads(pd);
+	destroy_mutexes(philos);
+	free(philos);
 }

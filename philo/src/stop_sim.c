@@ -6,12 +6,11 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/20 17:32:04 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/25 09:36:06 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "colors.h"
 #include <stdio.h>
 #include <stdlib.h>
 
