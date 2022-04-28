@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 18:13:47 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/28 19:51:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	destroy_mutexes(t_philosopher *philos, pthread_mutex_t stop_sim_lock, \
 		{
 			pthread_mutex_destroy(&philos[i].pd->forks[i]);
 			pthread_mutex_destroy(&philos[i].amount_meals_lock);
-			pthread_mutex_destroy(&philos[i].stop_sim_lock_local);
 			i++;
 		}
 	}
