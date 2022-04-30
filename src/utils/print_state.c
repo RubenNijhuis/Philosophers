@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 15:52:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/28 20:49:16 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_state(t_philosopher *philo, enum e_state state)
 
 	id = philo->id;
 	pthread_mutex_lock(&philo->pd->print_lock);
-	if (philo->pd->stop_sim == false)
+	if (stop_sim(philo) == false)
 	{
 		cur_time = gettime() - philo->pd->start_time;
 		printf("%011li %i ", cur_time, id);

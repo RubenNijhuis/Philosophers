@@ -6,13 +6,13 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/25 18:13:22 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/28 19:48:55 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
+bool	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 {
 	philos[id].pd = pd;
 	philos[id].id = id + 1;
@@ -21,15 +21,13 @@ int	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 	philos[id].left_fork = id - 1;
 	philos[id].amount_meals_eaten = 0;
 	if (pthread_mutex_init(&philos[id].amount_meals_lock, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&philos[id].stop_sim_lock_local, NULL) != 0)
-		return (0);
+		return (false);
 	if (id == 0)
 		philos[id].left_fork = pd->amount_philo - 1;
 	if (pthread_create(&pd->philo_threads[id], NULL, \
 		run_philosopher, &philos[id]) != 0)
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
 
 void	close_threads(t_program_data *pd)
@@ -44,12 +42,12 @@ void	close_threads(t_program_data *pd)
 	}
 }
 
-int	create_sim_death_checker(t_philosopher *philos)
+bool	create_sim_death_checker(t_philosopher *philos)
 {
 	pthread_t	death_checker;
 
 	if (pthread_create(&death_checker, NULL, run_death_checker, philos) != 0)
-		return (0);
+		return (false);
 	pthread_join(death_checker, NULL);
-	return (1);
+	return (true);
 }

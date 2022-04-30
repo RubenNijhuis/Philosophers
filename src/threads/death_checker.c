@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/25 22:17:43 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 09:29:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_death(t_program_data *pd, t_philosopher *philo)
 {
 	pthread_mutex_lock(&pd->print_lock);
 	printf("%011li %i died\n", gettime() - pd->start_time, philo->id);
+	pthread_mutex_unlock(&pd->print_lock);
 }
 
 void	set_stop_sim_lock(t_program_data *pd)
@@ -28,18 +29,12 @@ void	set_stop_sim_lock(t_program_data *pd)
 
 bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 {
-	pthread_mutex_lock(&philo->stop_sim_lock_local);
-	if (philo->stop_sim == false)
+	if ((gettime() - philo->last_time_eaten) > pd->time_to_die)
 	{
-		if ((gettime() - philo->last_time_eaten) > pd->time_to_die)
-		{
-			print_death(pd, philo);
-			set_stop_sim_lock(pd);
-			pthread_mutex_unlock(&philo->stop_sim_lock_local);
-			return (true);
-		}
+		print_death(pd, philo);
+		set_stop_sim_lock(pd);
+		return (true);
 	}
-	pthread_mutex_unlock(&philo->stop_sim_lock_local);
 	return (false);
 }
 
@@ -55,12 +50,7 @@ bool	all_full(t_philosopher *philos, t_program_data *pd)
 		pthread_mutex_lock(&philos[i].amount_meals_lock);
 		if (pd->amount_meals > 0 && \
 			philos[i].amount_meals_eaten == pd->amount_meals)
-		{
-			pthread_mutex_lock(&philos[i].stop_sim_lock_local);
-			philos[i].stop_sim = true;
-			pthread_mutex_unlock(&philos[i].stop_sim_lock_local);
 			amount_full++;
-		}
 		pthread_mutex_unlock(&philos[i].amount_meals_lock);
 		if (amount_full == pd->amount_philo)
 		{
@@ -85,15 +75,13 @@ void	*run_death_checker(void *philos_array)
 		i = 0;
 		while (i < pd->amount_philo)
 		{
-			if (is_philo_dead(&philos[i], pd))
-			{
-				pthread_mutex_unlock(&pd->print_lock);
+			if (is_philo_dead(&philos[i], pd) == true)
 				return (NULL);
-			}
 			i++;
 		}
-		if (all_full(philos, pd))
-			return (NULL);
+		if (pd->amount_meals != 0)
+			if (all_full(philos, pd) == true)
+				return (NULL);
 	}
 	return (NULL);
 }
