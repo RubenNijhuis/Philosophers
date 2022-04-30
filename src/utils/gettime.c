@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/23 13:52:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:56:39 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 10:06:48 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 uint32_t	gettime(void)
 {
-	uint32_t	ms;
+	uint32_t		ms;
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);

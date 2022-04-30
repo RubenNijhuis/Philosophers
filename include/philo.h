@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:55:15 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 10:07:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ enum e_state { sleeping, eating, pick_up_fork, died, thinking };
 // Program data struct
 typedef struct s_program_data
 {
-	uint32_t	amount_philo;
-	uint32_t	time_to_die;
-	uint32_t	time_to_eat;
-	uint32_t	time_to_sleep;
-	uint32_t	amount_meals;
-	uint32_t	start_time;
+	uint32_t		amount_philo;
+	uint32_t		time_to_die;
+	uint32_t		time_to_eat;
+	uint32_t		time_to_sleep;
+	uint32_t		amount_meals;
+	uint32_t		start_time;
 	bool			stop_sim;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	stop_sim_lock;
@@ -39,11 +39,11 @@ typedef struct s_program_data
 // Philosopher struct
 typedef struct s_philosopher
 {
-	uint32_t	id;
-	uint32_t	last_time_eaten;
-	uint32_t	left_fork;
-	uint32_t	right_fork;
-	uint32_t	amount_meals_eaten;
+	uint32_t		id;
+	uint32_t		last_time_eaten;
+	uint32_t		left_fork;
+	uint32_t		right_fork;
+	uint32_t		amount_meals_eaten;
 	pthread_mutex_t	amount_meals_lock;
 	t_program_data	*pd;
 }	t_philosopher;

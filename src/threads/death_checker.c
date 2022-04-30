@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 09:54:07 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 10:07:20 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*run_death_checker(void *philos_array)
 {
 	t_philosopher	*philos;
 	t_program_data	*pd;
-	uint32_t	i;
+	uint32_t		i;
 
 	philos = (t_philosopher *)philos_array;
 	pd = philos[0].pd;

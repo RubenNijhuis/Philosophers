@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 16:48:04 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:57:10 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 10:06:58 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int	contains(const char *set, char c)
 
 int	ft_atoi(const char *src)
 {
-	int				sign;
-	long			val;
+	int			sign;
+	long		val;
 	uint32_t	i;
 
 	sign = 1;

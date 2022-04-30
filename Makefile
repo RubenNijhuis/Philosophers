@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/04/28 21:04:50 by rnijhuis      ########   odam.nl          #
+#    Updated: 2022/04/30 10:12:00 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,13 @@
 NAME := philo
 INCLUDE_DIR := include
 SRC_DIR := src
-LIBS_DIR := libs
 OBJS_DIR := objs
 
 #=====================================#
 #============ Input files ============#
 #=====================================#
 
-LIB_HEADERS =
-LIB_HEADERS_INCLUDE =
-LIB_ARCHIVES =
-
-INC = -I $(INCLUDE_DIR) $(INCLUDE_LIBS)
+INC = -I $(INCLUDE_DIR)
 
 SRCS := main.c \
 		initiate.c \
@@ -78,6 +73,11 @@ get_src_files:
 
 run:
 	./$(NAME) $(TEST_DATA)
+
+norm:
+	-norminette $(SRC_DIR)
+	@echo
+	-norminette $(INCLUDE_DIR)/philo.h
 
 clean:
 	@rm -rf $(OBJS_DIR)
