@@ -1,5 +1,5 @@
 # Philosophers
-🧐  Philosophers is a project for Codam (42 network) which teaches multithreading 
+🧐  Philosophers is a project for Codam (42 network) which teaches multithreading and the usage of mutexes
 
 # Quick start
 ```

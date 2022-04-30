@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:28:18 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 10:03:12 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <unistd.h> // usleep
 
-bool	start_action(t_philosopher *philo, enum e_state state, int duration)
+static bool	start_action(t_philosopher *philo, enum e_state state, int duration)
 {
 	long	start_time;
 
@@ -24,13 +24,13 @@ bool	start_action(t_philosopher *philo, enum e_state state, int duration)
 	{
 		if (stop_sim(philo) == true)
 			return (false);
-		usleep(500);
+		usleep(250);
 	}
 	return (true);
 }
 
 /*
- * Subfunctionf or philo
+ * Subfunction or philo
  * will sleep for the specified time
 */
 bool	action_sleeping(t_philosopher *philo)
@@ -55,7 +55,7 @@ bool	action_thinking(t_philosopher *philo)
  * Subfunction for philo
  * uses the mutexes to claim forks
 */
-void	pick_up_forks(t_philosopher *philo)
+static void	pick_up_forks(t_philosopher *philo)
 {
 	if (philo->id % 2 == 0)
 	{

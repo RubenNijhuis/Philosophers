@@ -6,17 +6,18 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/28 19:51:42 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/30 09:59:03 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdlib.h>
 
 int	destroy_mutexes(t_philosopher *philos, pthread_mutex_t stop_sim_lock, \
 	pthread_mutex_t print_lock)
 {
-	int	i;
-	int	amount_philo;
+	uint32_t	i;
+	uint32_t	amount_philo;
 
 	i = 0;
 	amount_philo = philos[0].pd->amount_philo;

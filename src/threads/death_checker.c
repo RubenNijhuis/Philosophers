@@ -6,42 +6,35 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 09:29:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 09:54:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
 
-void	print_death(t_program_data *pd, t_philosopher *philo)
-{
-	pthread_mutex_lock(&pd->print_lock);
-	printf("%011li %i died\n", gettime() - pd->start_time, philo->id);
-	pthread_mutex_unlock(&pd->print_lock);
-}
-
-void	set_stop_sim_lock(t_program_data *pd)
+static void	set_stop_sim_lock(t_program_data *pd)
 {
 	pthread_mutex_lock(&pd->stop_sim_lock);
 	pd->stop_sim = true;
 	pthread_mutex_unlock(&pd->stop_sim_lock);
 }
 
-bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
+static bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 {
 	if ((gettime() - philo->last_time_eaten) > pd->time_to_die)
 	{
-		print_death(pd, philo);
+		print_state(philo, died);
 		set_stop_sim_lock(pd);
 		return (true);
 	}
 	return (false);
 }
 
-bool	all_full(t_philosopher *philos, t_program_data *pd)
+static bool	all_full(t_philosopher *philos, t_program_data *pd)
 {
-	int	i;
-	int	amount_full;
+	uint32_t	i;
+	uint32_t	amount_full;
 
 	i = 0;
 	amount_full = 0;
@@ -66,7 +59,7 @@ void	*run_death_checker(void *philos_array)
 {
 	t_philosopher	*philos;
 	t_program_data	*pd;
-	int				i;
+	uint32_t	i;
 
 	philos = (t_philosopher *)philos_array;
 	pd = philos[0].pd;
@@ -79,7 +72,7 @@ void	*run_death_checker(void *philos_array)
 				return (NULL);
 			i++;
 		}
-		if (pd->amount_meals != 0)
+		if (pd->amount_meals > 0)
 			if (all_full(philos, pd) == true)
 				return (NULL);
 	}

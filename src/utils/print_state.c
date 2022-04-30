@@ -6,24 +6,26 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/28 20:49:16 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/30 09:58:27 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
+
+#include <stdio.h>	// printf
+#include <stdlib.h> // uint32_t
 
 void	print_state(t_philosopher *philo, enum e_state state)
 {
-	int			id;
-	long int	cur_time;
+	uint32_t	id;
+	uint32_t	cur_time;
 
 	id = philo->id;
 	pthread_mutex_lock(&philo->pd->print_lock);
 	if (stop_sim(philo) == false)
 	{
 		cur_time = gettime() - philo->pd->start_time;
-		printf("%011li %i ", cur_time, id);
+		printf("%011u %u ", cur_time, id);
 		if (state == sleeping)
 			printf("is sleeping\n");
 		else if (state == eating)
@@ -32,6 +34,8 @@ void	print_state(t_philosopher *philo, enum e_state state)
 			printf("has taken a fork\n");
 		else if (state == thinking)
 			printf("is thinking\n");
+		else if (state == died)
+			printf("died\n");
 	}
 	pthread_mutex_unlock(&philo->pd->print_lock);
 }

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   convert_time.c                                     :+:    :+:            */
+/*   gettime.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/23 13:52:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/03/12 10:13:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 09:56:39 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
+#include <sys/time.h>	// gettimeofday
+#include <stdlib.h>		// uint32_t
 
-long	gettime(void)
+uint32_t	gettime(void)
 {
-	long			ms;
+	uint32_t	ms;
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);

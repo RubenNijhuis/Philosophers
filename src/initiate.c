@@ -6,11 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:27:29 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/04/30 09:57:26 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdlib.h>	// uin32_t
 
 /*
 	Initiates the basic data that every philo needs
@@ -19,12 +20,12 @@
  */
 bool	initiate_data(t_program_data *pd, char **argv)
 {
-	pd->amount_philo = ft_atoi(argv[1]);
-	pd->time_to_die = ft_atoi(argv[2]);
-	pd->time_to_eat = ft_atoi(argv[3]);
-	pd->time_to_sleep = ft_atoi(argv[4]);
+	pd->amount_philo = (uint32_t)ft_atoi(argv[1]);
+	pd->time_to_die = (uint32_t)ft_atoi(argv[2]);
+	pd->time_to_eat = (uint32_t)ft_atoi(argv[3]);
+	pd->time_to_sleep = (uint32_t)ft_atoi(argv[4]);
 	if (argv[5])
-		pd->amount_meals = ft_atoi(argv[5]);
+		pd->amount_meals = (uint32_t)ft_atoi(argv[5]);
 	pd->start_time = gettime();
 	if (pthread_mutex_init(&pd->print_lock, NULL) != 0)
 		return (false);
@@ -39,7 +40,7 @@ bool	initiate_data(t_program_data *pd, char **argv)
  */
 bool	initiate_table(t_program_data *pd, t_philosopher *philos)
 {
-	int	i;
+	uint32_t	i;
 
 	i = 0;
 	while (i < pd->amount_philo)

@@ -6,9 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 16:48:04 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/01/27 16:48:31 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/04/30 09:57:10 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>	// uin32_t
 
 static	int	ft_isdigit(int c)
 {
@@ -44,7 +46,7 @@ int	ft_atoi(const char *src)
 {
 	int				sign;
 	long			val;
-	unsigned int	i;
+	uint32_t	i;
 
 	sign = 1;
 	val = 0;
