@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/04/30 10:12:00 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/05/02 21:51:31 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ NAME := philo
 INCLUDE_DIR := include
 SRC_DIR := src
 OBJS_DIR := objs
+BIN_DIR := bin
+OUTPUT := $(BIN_DIR)/$(NAME)
 
 #=====================================#
 #============ Input files ============#
@@ -62,29 +64,25 @@ objs/%.o:src/*%.c $(INCLUDE_DIR)/* $(LIB_HEADERS)
 	@$(CC) -c $(CFLAGS) -o $@ $<
 	@echo "🔨 Compiling: $<"
 
-all: $(NAME)
+all: $(OUTPUT)
 
-$(NAME):$(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) -pthread -o $(NAME)
+$(OUTPUT):$(OBJS)
+	@$(CC) $(OBJS) $(LDFLAGS) $(NO_DEAD_CODE) -pthread -o $(OUTPUT)
 	@echo "✅ Built $(NAME)"
 
-get_src_files:
-	@find $(SRC_DIR) | cut -b 5-
-
 run:
-	./$(NAME) $(TEST_DATA)
+	./$(OUTPUT) $(TEST_DATA)
 
 norm:
-	-norminette $(SRC_DIR)
-	@echo
-	-norminette $(INCLUDE_DIR)/philo.h
+	@-norminette $(INCLUDE_DIR)/philo.h
+	@-norminette $(SRC_DIR)
 
 clean:
 	@rm -rf $(OBJS_DIR)
 	@echo "🧹 Removing object files"
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(OUTPUT)
 	@echo "🧹 Removing $(NAME) executable"
 
 re: fclean all

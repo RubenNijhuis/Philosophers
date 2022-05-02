@@ -1,5 +1,10 @@
+# MacOS
 .DS_Store
+
+# Compilation
 *.o
 *.out
 objs/
-philo
+
+# Visual Studio Code
+.vscode/

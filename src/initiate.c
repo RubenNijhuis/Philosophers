@@ -6,12 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:57:26 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 21:34:57 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>	// uin32_t
+#include <stdio.h>
 
 /*
 	Initiates the basic data that every philo needs
@@ -27,6 +27,12 @@ bool	initiate_data(t_program_data *pd, char **argv)
 	if (argv[5])
 		pd->amount_meals = (uint32_t)ft_atoi(argv[5]);
 	pd->start_time = gettime();
+	pd->forks = ft_calloc(pd->amount_philo, sizeof(pthread_mutex_t));
+	if (!pd->forks)
+		return (false);
+	pd->philo_threads = ft_calloc(pd->amount_philo, sizeof(pthread_t));
+	if (!pd->philo_threads)
+		return (false);
 	if (pthread_mutex_init(&pd->print_lock, NULL) != 0)
 		return (false);
 	if (pthread_mutex_init(&pd->stop_sim_lock, NULL) != 0)
@@ -47,7 +53,7 @@ bool	initiate_table(t_program_data *pd, t_philosopher *philos)
 	{
 		if (pthread_mutex_init(&pd->forks[i], NULL) != 0)
 			return (false);
-		if (!make_philo_thread(philos, pd, i))
+		if (make_philo_thread(philos, pd, i) == false)
 			return (false);
 		i++;
 	}

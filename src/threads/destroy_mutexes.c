@@ -6,12 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:37 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:59:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 21:29:48 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
 
 int	destroy_mutexes(t_philosopher *philos, pthread_mutex_t stop_sim_lock, \
 	pthread_mutex_t print_lock)

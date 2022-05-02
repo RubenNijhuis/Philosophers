@@ -6,11 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 16:48:04 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 10:06:58 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 21:18:27 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>	// uin32_t
+#include <stdlib.h>
 
 static	int	ft_isdigit(int c)
 {
@@ -42,9 +42,9 @@ static int	contains(const char *set, char c)
 	return (0);
 }
 
-int	ft_atoi(const char *src)
+int32_t	ft_atoi(const char *src)
 {
-	int			sign;
+	int32_t		sign;
 	long		val;
 	uint32_t	i;
 
@@ -67,5 +67,5 @@ int	ft_atoi(const char *src)
 		val += src[i] - '0';
 		i++;
 	}
-	return ((int) val * sign);
+	return ((int32_t) val * sign);
 }

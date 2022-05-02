@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 09:27:30 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 21:30:40 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	not being able to use `exit()` I had to add
 	a lot of return checks
  */
-int	main(int argc, char **argv)
+int32_t	main(int argc, char **argv)
 {
 	t_program_data	pd;
 	t_philosopher	*philos;
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	philos = NULL;
 	ft_bzero(&pd, sizeof(pd));
 	if (validate_arguments(argc, argv) == false)
-		return (1);
+		return (EXIT_FAILURE);
 	if (initiate_data(&pd, argv) == false)
 		return (destroy_mutexes(philos, pd.stop_sim_lock, pd.print_lock));
 	philos = ft_calloc(pd.amount_philo, sizeof(t_philosopher));
@@ -35,5 +35,5 @@ int	main(int argc, char **argv)
 		return (destroy_mutexes(philos, pd.stop_sim_lock, pd.print_lock));
 	close_threads(&pd);
 	destroy_mutexes(philos, pd.stop_sim_lock, pd.print_lock);
-	return (0);
+	return (EXIT_SUCCESS);
 }

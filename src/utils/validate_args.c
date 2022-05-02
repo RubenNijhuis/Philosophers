@@ -6,12 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/14 09:40:18 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 10:01:50 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/02 21:36:35 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>	// uin32_t
+#include <stdio.h>
 
 static bool	is_only_number(char *str)
 {
@@ -34,6 +34,11 @@ bool	validate_arguments(int argc, char **argv)
 	i = 1;
 	if (argc != 5 && argc != 6)
 		return (false);
+	if (ft_atoi(argv[1]) > 200)
+	{
+		printf("Error: too many philosophers\n");
+		return (false);
+	}
 	while (i < (uint32_t)argc)
 	{
 		if (ft_atoi(argv[i]) < 1 || is_only_number(argv[i]) == false)
