@@ -11,6 +11,8 @@ And watch as the philosophers dine and enjoy a nice meal
 ## Structure
 ```
 /- Philo
+    /- bin
+        # compiled program gets put here
     /- include
         # files like .h can be put here
     /- src
