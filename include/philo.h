@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/02 21:23:51 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/03 21:33:03 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		*ft_bzero(void *ptr, size_t len);
 bool		action_eating(t_philosopher *philo);
 bool		action_sleeping(t_philosopher *philo);
 bool		action_thinking(t_philosopher *philo);
+void		increment_amount_times_eaten(t_philosopher *philo);
 void		*run_philosopher(void *philosopher);
 
 // Thread utils

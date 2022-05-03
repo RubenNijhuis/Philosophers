@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/04/30 10:03:12 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/03 21:32:45 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ bool	action_eating(t_philosopher *philo)
 {
 	pick_up_forks(philo);
 	philo->last_time_eaten = gettime();
-	pthread_mutex_lock(&philo->amount_meals_lock);
-	philo->amount_meals_eaten++;
-	pthread_mutex_unlock(&philo->amount_meals_lock);
+	if (philo->pd->amount_meals > 0)
+		increment_amount_times_eaten(philo);
 	if (start_action(philo, eating, philo->pd->time_to_eat) == false)
 		return (false);
 	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);

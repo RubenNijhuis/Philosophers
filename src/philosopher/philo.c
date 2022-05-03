@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/04/30 10:04:00 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/03 21:36:33 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ bool	stop_sim(t_philosopher *philo)
 	return (false);
 }
 
+void	increment_amount_times_eaten(t_philosopher *philo)
+{
+	pthread_mutex_lock(&philo->amount_meals_lock);
+	philo->amount_meals_eaten++;
+	pthread_mutex_unlock(&philo->amount_meals_lock);
+}
+
 void	*run_philosopher(void *philosopher)
 {
 	t_philosopher	*philo;
@@ -43,7 +50,7 @@ void	*run_philosopher(void *philosopher)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
-		usleep(50);
+		usleep(500);
 	while (stop_sim(philo) == false)
 	{
 		if (action_eating(philo) == false)

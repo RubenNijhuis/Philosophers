@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/02 21:30:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/03 21:37:45 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int32_t	main(int argc, char **argv)
 	t_philosopher	*philos;
 
 	philos = NULL;
-	ft_bzero(&pd, sizeof(pd));
+	ft_bzero(&pd, sizeof(t_program_data));
 	if (validate_arguments(argc, argv) == false)
 		return (EXIT_FAILURE);
 	if (initiate_data(&pd, argv) == false)
