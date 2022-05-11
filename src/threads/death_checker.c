@@ -6,12 +6,14 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/02 21:44:45 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 19:05:02 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 #include <unistd.h>	// usleep
+#include <stdint.h>	// uint32_t
 
 static void	set_stop_sim_lock(t_program_data *pd)
 {
@@ -75,7 +77,7 @@ void	*run_death_checker(void *philos_array)
 		if (pd->amount_meals > 0)
 			if (all_full(philos, pd) == true)
 				return (NULL);
-		usleep(500);
+		usleep(CHECKER_INTERVAL);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/02 21:18:01 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 18:44:16 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "colors.h"
 
 #include <stdio.h>	// printf
+#include <stdint.h>	// uint32_t
 
 void	print_state(t_philosopher *philo, enum e_state state)
 {

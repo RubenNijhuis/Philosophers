@@ -6,12 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/23 13:52:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/02 21:17:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 18:46:45 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>	// gettimeofday
-#include <stdlib.h>		// uint32_t
+#include <stdint.h>		// uint32_t
 
 uint32_t	gettime(void)
 {

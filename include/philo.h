@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/03 21:33:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 19:04:30 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,37 @@
 
 # include <pthread.h>	// pthread_mutex_t
 # include <stdbool.h>	// bool
-# include <stdlib.h>	// uint32_t
+# include <stdint.h>	// uint32_t
 
 // Current philo state for print_state
-enum e_state { sleeping, eating, pick_up_fork, died, thinking };
+typedef enum e_state
+{
+	sleeping,
+	eating,
+	pick_up_fork,
+	died,
+	thinking
+}	t_state;
+
+# define ACTION_INTERVAL 250
+# define CHECKER_INTERVAL 250
 
 // Program data struct
 typedef struct s_program_data
 {
 	uint32_t		amount_philo;
+
 	uint32_t		time_to_die;
 	uint32_t		time_to_eat;
 	uint32_t		time_to_sleep;
 	uint32_t		amount_meals;
+
 	uint32_t		start_time;
-	bool			stop_sim;
+
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	stop_sim_lock;
+	bool			stop_sim;
+
 	pthread_mutex_t	*forks;
 	pthread_t		*philo_threads;
 }	t_program_data;
@@ -40,11 +54,14 @@ typedef struct s_program_data
 typedef struct s_philosopher
 {
 	uint32_t		id;
+
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+
 	uint32_t		last_time_eaten;
-	uint32_t		left_fork;
-	uint32_t		right_fork;
 	uint32_t		amount_meals_eaten;
 	pthread_mutex_t	amount_meals_lock;
+
 	t_program_data	*pd;
 }	t_philosopher;
 

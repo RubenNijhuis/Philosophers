@@ -6,11 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 16:48:04 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/02 21:18:27 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 18:45:56 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdint.h> // int32_t
 
 static	int	ft_isdigit(int c)
 {

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/03 21:32:45 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 18:56:47 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	start_action(t_philosopher *philo, enum e_state state, int duration)
 	{
 		if (stop_sim(philo) == true)
 			return (false);
-		usleep(250);
+		usleep(ACTION_INTERVAL);
 	}
 	return (true);
 }
@@ -59,16 +59,16 @@ static void	pick_up_forks(t_philosopher *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(&philo->pd->forks[philo->left_fork]);
+		pthread_mutex_lock(philo->left_fork);
 		print_state(philo, pick_up_fork);
-		pthread_mutex_lock(&philo->pd->forks[philo->right_fork]);
+		pthread_mutex_lock(philo->right_fork);
 		print_state(philo, pick_up_fork);
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->pd->forks[philo->right_fork]);
+		pthread_mutex_lock(philo->right_fork);
 		print_state(philo, pick_up_fork);
-		pthread_mutex_lock(&philo->pd->forks[philo->left_fork]);
+		pthread_mutex_lock(philo->left_fork);
 		print_state(philo, pick_up_fork);
 	}
 }
@@ -85,7 +85,7 @@ bool	action_eating(t_philosopher *philo)
 		increment_amount_times_eaten(philo);
 	if (start_action(philo, eating, philo->pd->time_to_eat) == false)
 		return (false);
-	pthread_mutex_unlock(&philo->pd->forks[philo->left_fork]);
-	pthread_mutex_unlock(&philo->pd->forks[philo->right_fork]);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 	return (true);
 }

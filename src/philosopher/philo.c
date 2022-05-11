@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/03 21:36:33 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 19:03:11 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ bool	stop_sim(t_philosopher *philo)
 	pthread_mutex_lock(&pd->stop_sim_lock);
 	if (pd->stop_sim == true)
 	{
-		pthread_mutex_unlock(&pd->forks[philo->left_fork]);
-		pthread_mutex_unlock(&pd->forks[philo->right_fork]);
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_unlock(&pd->stop_sim_lock);
 		return (true);
 	}

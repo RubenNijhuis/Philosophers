@@ -6,12 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/14 09:40:18 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/02 21:36:35 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/11 18:45:26 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
+
+#include <stdint.h>	// uint32_t
+#include <stdio.h>	// printf
 
 static bool	is_only_number(char *str)
 {
