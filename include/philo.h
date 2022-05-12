@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/11 19:04:30 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/12 07:35:26 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool		initiate_data(t_program_data *pd, char **argv);
 bool		initiate_table(t_program_data *pd, t_philosopher *philos);
 
 // Utils
-void		print_state(t_philosopher *philo, enum e_state state);
+void		print_state(t_philosopher *philo, t_state state);
 void		*ft_calloc(size_t count, size_t size);
 int32_t		ft_atoi(const char *src);
 bool		validate_arguments(int argc, char **argv);

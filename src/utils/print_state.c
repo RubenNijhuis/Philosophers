@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/11 18:44:16 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/12 07:36:31 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>	// printf
 #include <stdint.h>	// uint32_t
 
-void	print_state(t_philosopher *philo, enum e_state state)
+void	print_state(t_philosopher *philo, t_state state)
 {
 	uint32_t	id;
 	uint32_t	cur_time;

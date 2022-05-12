@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/11 19:05:02 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/12 07:42:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static bool	all_full(t_philosopher *philos, t_program_data *pd)
 	while (i < pd->amount_philo)
 	{
 		pthread_mutex_lock(&philos[i].amount_meals_lock);
-		if (pd->amount_meals > 0 && \
-			philos[i].amount_meals_eaten == pd->amount_meals)
+		if (philos[i].amount_meals_eaten == pd->amount_meals)
 			amount_full++;
 		pthread_mutex_unlock(&philos[i].amount_meals_lock);
 		if (amount_full == pd->amount_philo)
