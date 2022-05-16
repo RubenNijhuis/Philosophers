@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/11 19:03:11 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/16 12:33:07 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,22 @@ void	increment_amount_times_eaten(t_philosopher *philo)
 	pthread_mutex_unlock(&philo->amount_meals_lock);
 }
 
+static void	*single_philo_case(t_philosopher *philo)
+{
+	print_state(philo, pick_up_fork);
+	usleep(philo->pd->time_to_die);
+	return (NULL);
+}
+
 void	*run_philosopher(void *philosopher)
 {
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)philosopher;
 	if (philo->pd->amount_philo == 1)
-	{
-		print_state(philo, pick_up_fork);
-		usleep(philo->pd->time_to_die);
-		return (NULL);
-	}
+		return (single_philo_case(philo));
 	if (philo->id % 2 == 0)
-		usleep(500);
+		usleep(ACTION_INTERVAL);
 	while (stop_sim(philo) == false)
 	{
 		if (action_eating(philo) == false)

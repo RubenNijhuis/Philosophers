@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/11 18:56:47 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/16 12:27:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #include <unistd.h> // usleep
 
-static bool	start_action(t_philosopher *philo, enum e_state state, int duration)
+static bool	start_action(t_philosopher *philo, t_state state, uint32_t duration)
 {
-	long	start_time;
+	int64_t	start_time;
 
 	start_time = gettime();
 	print_state(philo, state);
