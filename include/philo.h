@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/12 07:35:26 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/17 22:06:09 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef enum e_state
 // Program data struct
 typedef struct s_program_data
 {
-	uint32_t		amount_philo;
+	uint32_t		amount_philos;
 
 	uint32_t		time_to_die;
 	uint32_t		time_to_eat;
@@ -73,11 +73,11 @@ bool		initiate_table(t_program_data *pd, t_philosopher *philos);
 void		print_state(t_philosopher *philo, t_state state);
 void		*ft_calloc(size_t count, size_t size);
 int32_t		ft_atoi(const char *src);
-bool		validate_arguments(int argc, char **argv);
+bool		validate_arguments(uint32_t argc, char **argv);
 uint32_t	gettime(void);
 void		*ft_bzero(void *ptr, size_t len);
 
-// Philo
+// Philosopher
 bool		action_eating(t_philosopher *philo);
 bool		action_sleeping(t_philosopher *philo);
 bool		action_thinking(t_philosopher *philo);
@@ -85,9 +85,9 @@ void		increment_amount_times_eaten(t_philosopher *philo);
 void		*run_philosopher(void *philosopher);
 
 // Thread utils
-void		close_threads(t_program_data *pd);
+void		join_threads(uint32_t amount_philos, pthread_t *philo_threads);
 bool		make_philo_thread(t_philosopher *philos, \
-				t_program_data *pd, int id);
+				t_program_data *pd, uint32_t id);
 bool		stop_sim(t_philosopher *philo);
 int32_t		destroy_mutexes(t_philosopher *philos, \
 				pthread_mutex_t stop_sim_lock, pthread_mutex_t print_lock);

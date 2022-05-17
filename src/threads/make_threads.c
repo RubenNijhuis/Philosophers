@@ -6,14 +6,15 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/11 19:06:05 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/17 22:13:59 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdint.h>
 
-bool	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
+bool	make_philo_thread(t_philosopher *philos, t_program_data *pd, \
+	uint32_t id)
 {
 	philos[id].pd = pd;
 	philos[id].id = id + 1;
@@ -22,7 +23,7 @@ bool	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 	philos[id].left_fork = &pd->forks[id - 1];
 	philos[id].amount_meals_eaten = 0;
 	if (id == 0)
-		philos[id].left_fork = &pd->forks[pd->amount_philo - 1];
+		philos[id].left_fork = &pd->forks[pd->amount_philos - 1];
 	if (pthread_mutex_init(&philos[id].amount_meals_lock, NULL) != 0)
 		return (false);
 	if (pthread_create(&pd->philo_threads[id], NULL, \
@@ -31,14 +32,14 @@ bool	make_philo_thread(t_philosopher *philos, t_program_data *pd, int id)
 	return (true);
 }
 
-void	close_threads(t_program_data *pd)
+void	join_threads(uint32_t amount_philos, pthread_t *philo_threads)
 {
 	uint32_t	i;
 
 	i = 0;
-	while (i < pd->amount_philo)
+	while (i < amount_philos)
 	{
-		pthread_join(pd->philo_threads[i], NULL);
+		pthread_join(philo_threads[i], NULL);
 		i++;
 	}
 }

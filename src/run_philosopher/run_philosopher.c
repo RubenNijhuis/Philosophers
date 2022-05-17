@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philo.c                                            :+:    :+:            */
+/*   run_philosopher.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/01 18:03:08 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/16 12:33:07 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/05/17 22:23:25 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*run_philosopher(void *philosopher)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)philosopher;
-	if (philo->pd->amount_philo == 1)
+	if (philo->pd->amount_philos == 1)
 		return (single_philo_case(philo));
 	if (philo->id % 2 == 0)
 		usleep(ACTION_INTERVAL);

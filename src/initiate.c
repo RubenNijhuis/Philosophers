@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/11 18:42:52 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/17 22:04:54 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
  */
 bool	initiate_data(t_program_data *pd, char **argv)
 {
-	pd->amount_philo = (uint32_t)ft_atoi(argv[1]);
+	pd->amount_philos = (uint32_t)ft_atoi(argv[1]);
 	pd->time_to_die = (uint32_t)ft_atoi(argv[2]);
 	pd->time_to_eat = (uint32_t)ft_atoi(argv[3]);
 	pd->time_to_sleep = (uint32_t)ft_atoi(argv[4]);
 	if (argv[5])
 		pd->amount_meals = (uint32_t)ft_atoi(argv[5]);
 	pd->start_time = gettime();
-	pd->forks = ft_calloc(pd->amount_philo, sizeof(pthread_mutex_t));
+	pd->forks = ft_calloc(pd->amount_philos, sizeof(pthread_mutex_t));
 	if (!pd->forks)
 		return (false);
-	pd->philo_threads = ft_calloc(pd->amount_philo, sizeof(pthread_t));
+	pd->philo_threads = ft_calloc(pd->amount_philos, sizeof(pthread_t));
 	if (!pd->philo_threads)
 		return (false);
 	if (pthread_mutex_init(&pd->print_lock, NULL) != 0)
@@ -48,7 +48,7 @@ bool	initiate_table(t_program_data *pd, t_philosopher *philos)
 	uint32_t	i;
 
 	i = 0;
-	while (i < pd->amount_philo)
+	while (i < pd->amount_philos)
 	{
 		if (pthread_mutex_init(&pd->forks[i], NULL) != 0)
 			return (false);

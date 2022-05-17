@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/12 07:42:42 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/05/17 22:18:26 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static bool	all_full(t_philosopher *philos, t_program_data *pd)
 
 	i = 0;
 	amount_full = 0;
-	while (i < pd->amount_philo)
+	while (i < pd->amount_philos)
 	{
 		pthread_mutex_lock(&philos[i].amount_meals_lock);
 		if (philos[i].amount_meals_eaten == pd->amount_meals)
 			amount_full++;
 		pthread_mutex_unlock(&philos[i].amount_meals_lock);
-		if (amount_full == pd->amount_philo)
+		if (amount_full == pd->amount_philos)
 		{
 			set_stop_sim_lock(pd);
 			return (true);
@@ -56,6 +56,15 @@ static bool	all_full(t_philosopher *philos, t_program_data *pd)
 	return (false);
 }
 
+/**
+ * @brief 
+ * Seperate thread that checks the status of the philos.
+ * Will return null if a philsopher died or if they 
+ * have eaten a specified number of times
+ * 
+ * @param philos_array 
+ * @return void* 
+ */
 void	*run_death_checker(void *philos_array)
 {
 	t_philosopher	*philos;
@@ -67,15 +76,14 @@ void	*run_death_checker(void *philos_array)
 	while (1)
 	{
 		i = 0;
-		while (i < pd->amount_philo)
+		while (i < pd->amount_philos)
 		{
 			if (is_philo_dead(&philos[i], pd) == true)
 				return (NULL);
 			i++;
 		}
-		if (pd->amount_meals > 0)
-			if (all_full(philos, pd) == true)
-				return (NULL);
+		if (pd->amount_meals > 0 && all_full(philos, pd) == true)
+			return (NULL);
 		usleep(CHECKER_INTERVAL);
 	}
 	return (NULL);
