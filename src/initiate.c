@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:04:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:38:22 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Initiates the basic data that every philo needs
 	and puts it into the program data struct
 	Also initializes the mutexes for global use
- */
+*/
 bool	initiate_data(t_program_data *pd, char **argv)
 {
 	pd->amount_philos = (uint32_t)ft_atoi(argv[1]);
@@ -42,10 +42,10 @@ bool	initiate_data(t_program_data *pd, char **argv)
 /*
 	Initiates the table bits, philosopher threads and forks
 	As well as the death checker thread
- */
+*/
 bool	initiate_table(t_program_data *pd, t_philosopher *philos)
 {
-	uint32_t	i;
+	size_t	i;
 
 	i = 0;
 	while (i < pd->amount_philos)

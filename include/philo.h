@@ -6,16 +6,16 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:06:09 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:41:18 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>	// pthread_mutex_t
-# include <stdbool.h>	// bool
-# include <stdint.h>	// uint32_t
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdint.h>
 
 // Current philo state for print_state
 typedef enum e_state
@@ -69,21 +69,6 @@ typedef struct s_philosopher
 bool		initiate_data(t_program_data *pd, char **argv);
 bool		initiate_table(t_program_data *pd, t_philosopher *philos);
 
-// Utils
-void		print_state(t_philosopher *philo, t_state state);
-void		*ft_calloc(size_t count, size_t size);
-int32_t		ft_atoi(const char *src);
-bool		validate_arguments(uint32_t argc, char **argv);
-uint32_t	gettime(void);
-void		*ft_bzero(void *ptr, size_t len);
-
-// Philosopher
-bool		action_eating(t_philosopher *philo);
-bool		action_sleeping(t_philosopher *philo);
-bool		action_thinking(t_philosopher *philo);
-void		increment_amount_times_eaten(t_philosopher *philo);
-void		*run_philosopher(void *philosopher);
-
 // Thread utils
 void		join_threads(uint32_t amount_philos, pthread_t *philo_threads);
 bool		make_philo_thread(t_philosopher *philos, \
@@ -92,8 +77,23 @@ bool		stop_sim(t_philosopher *philo);
 int32_t		destroy_mutexes(t_philosopher *philos, \
 				pthread_mutex_t stop_sim_lock, pthread_mutex_t print_lock);
 
+// Philosopher
+bool		action_eating(t_philosopher *philo);
+bool		action_sleeping(t_philosopher *philo);
+bool		action_thinking(t_philosopher *philo);
+void		increment_amount_times_eaten(t_philosopher *philo);
+void		*run_philosopher(void *philosopher);
+
 // Simulation goal checks
 void		*run_death_checker(void *philos_array);
 bool		create_sim_death_checker(t_philosopher *philos);
+
+// Utils
+void		print_state(t_philosopher *philo, t_state state);
+void		*ft_calloc(size_t count, size_t size);
+int32_t		ft_atoi(const char *src);
+bool		validate_arguments(uint32_t argc, char **argv);
+uint32_t	gettime(void);
+void		*ft_bzero(void *ptr, size_t len);
 
 #endif

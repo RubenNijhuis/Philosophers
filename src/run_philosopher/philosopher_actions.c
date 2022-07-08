@@ -6,13 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 14:35:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:27:24 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:37:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <unistd.h> // usleep
+#include <unistd.h>
+#include <stdint.h>
 
 static bool	start_action(t_philosopher *philo, t_state state, uint32_t duration)
 {

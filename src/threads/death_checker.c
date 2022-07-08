@@ -6,14 +6,15 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 22:18:26 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:34:51 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <unistd.h>	// usleep
-#include <stdint.h>	// uint32_t
+#include <unistd.h>
+#include <stdint.h>
+#include <stddef.h>
 
 static void	set_stop_sim_lock(t_program_data *pd)
 {
@@ -35,7 +36,7 @@ static bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 
 static bool	all_full(t_philosopher *philos, t_program_data *pd)
 {
-	uint32_t	i;
+	size_t		i;
 	uint32_t	amount_full;
 
 	i = 0;
@@ -69,7 +70,7 @@ void	*run_death_checker(void *philos_array)
 {
 	t_philosopher	*philos;
 	t_program_data	*pd;
-	uint32_t		i;
+	size_t			i;
 
 	philos = (t_philosopher *)philos_array;
 	pd = philos[0].pd;

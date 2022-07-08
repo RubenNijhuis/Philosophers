@@ -6,14 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/14 09:40:18 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:21:12 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:32:50 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <stdint.h>	// uint32_t
-#include <stdio.h>	// printf
+#include <stdint.h>
+#include <stdio.h>
 
 /**
  * @brief 
@@ -25,7 +25,7 @@
  */
 static bool	is_only_number(char *str)
 {
-	uint32_t	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -47,7 +47,7 @@ static bool	is_only_number(char *str)
  */
 bool	validate_arguments(uint32_t argc, char **argv)
 {
-	uint32_t	i;
+	size_t	i;
 
 	i = 1;
 	if (argc != 5 && argc != 6)

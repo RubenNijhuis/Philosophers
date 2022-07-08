@@ -6,19 +6,19 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:37:57 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/12 07:36:31 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2022/07/08 12:37:23 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "colors.h"
 
-#include <stdio.h>	// printf
-#include <stdint.h>	// uint32_t
+#include <stdio.h>
+#include <stdint.h>
 
 void	print_state(t_philosopher *philo, t_state state)
 {
-	uint32_t	id;
+	size_t		id;
 	uint32_t	cur_time;
 
 	id = philo->id;
@@ -26,7 +26,7 @@ void	print_state(t_philosopher *philo, t_state state)
 	if (stop_sim(philo) == false)
 	{
 		cur_time = gettime() - philo->pd->start_time;
-		printf("%011u %u ", cur_time, id);
+		printf("%011u %zu ", cur_time, id);
 		if (state == sleeping)
 			printf(MAG "is sleeping\n" RESET);
 		else if (state == eating)
