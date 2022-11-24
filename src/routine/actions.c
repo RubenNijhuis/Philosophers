@@ -32,7 +32,7 @@ static bool	start_action(t_philosopher *philo, t_state state, uint32_t duration)
 /*
  * Subfunction or philo
  * will sleep for the specified time
-*/
+ */
 bool	action_sleeping(t_philosopher *philo)
 {
 	if (start_action(philo, sleeping, philo->pd->time_to_sleep) == false)
@@ -43,7 +43,7 @@ bool	action_sleeping(t_philosopher *philo)
 /*
  * Subfunction for philo
  * will think for a bit and move on
-*/
+ */
 bool	action_thinking(t_philosopher *philo)
 {
 	if (start_action(philo, thinking, 0) == false)
@@ -54,7 +54,7 @@ bool	action_thinking(t_philosopher *philo)
 /*
  * Subfunction for philo
  * uses the mutexes to claim forks
-*/
+ */
 static void	pick_up_forks(t_philosopher *philo)
 {
 	if (philo->id % 2 == 0)
@@ -76,7 +76,7 @@ static void	pick_up_forks(t_philosopher *philo)
 /*
  * Philo will pick up their forks and eat
  * records: last_time_eaten
-*/
+ */
 bool	action_eating(t_philosopher *philo)
 {
 	pick_up_forks(philo);

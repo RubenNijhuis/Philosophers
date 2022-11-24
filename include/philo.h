@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:23:26 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:06:09 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/06/10 15:50:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef enum e_state
 	thinking
 }	t_state;
 
-# define ACTION_INTERVAL 250
-# define CHECKER_INTERVAL 250
+# define ACTION_INTERVAL 750
+# define CHECKER_INTERVAL 500
 
 // Program data struct
 typedef struct s_program_data
@@ -38,11 +38,13 @@ typedef struct s_program_data
 	uint32_t		time_to_die;
 	uint32_t		time_to_eat;
 	uint32_t		time_to_sleep;
+
 	uint32_t		amount_meals;
 
 	uint32_t		start_time;
 
 	pthread_mutex_t	print_lock;
+
 	pthread_mutex_t	stop_sim_lock;
 	bool			stop_sim;
 

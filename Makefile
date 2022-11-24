@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.oodam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/29 10:35:30 by rnijhuis      #+#    #+#                  #
-#    Updated: 2022/05/17 22:27:39 by rubennijhui   ########   odam.nl          #
+#    Updated: 2022/09/12 15:02:47 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,46 +14,44 @@
 #============ General vars ===========#
 #=====================================#
 
-NAME :=			philo
-INCLUDE_DIR :=	include
-SRC_DIR :=		src
-OBJS_DIR :=		objs
-BIN_DIR :=		bin
-OUTPUT :=		$(BIN_DIR)/$(NAME)
+NAME			:=	philo
+INCLUDE_DIR		:=	include
+SRC_DIR			:=	src
+OBJS_DIR		:=	objs
 
 #=====================================#
 #============ Input files ============#
 #=====================================#
 
-INC =	-I $(INCLUDE_DIR)
+INC				:=	-I $(INCLUDE_DIR)
 
-SRCS := main.c \
-		initiate.c \
-		\
-		run_philosopher/run_philosopher.c \
-		run_philosopher/philosopher_actions.c \
-		\
-		utils/gettime.c \
-		utils/ft_atoi.c \
-		utils/ft_calloc.c \
-		utils/print_state.c \
-		utils/validate_args.c \
-		\
-		threads/make_threads.c \
-		threads/death_checker.c \
-		threads/destroy_mutexes.c \
+SRCS			:=	main.c \
+					initiate.c \
+					\
+					routine/run.c \
+					routine/actions.c \
+					\
+					utils/gettime.c \
+					utils/ft_atoi.c \
+					utils/ft_calloc.c \
+					utils/print_state.c \
+					utils/validate_args.c \
+					\
+					threads/make_threads.c \
+					threads/death_checker.c \
+					threads/destroy_mutexes.c \
 
-OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+OBJS			:=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
 
 #=====================================#
 #========= Command arguments =========#
 #=====================================#
 
-CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -g $(INC)
-# LDFLAGS =	-fsanitize=thread
+CC				:=	gcc
+CFLAGS			:=	-Wall -Wextra -Werror $(INC)
+# CFLAGS += -g -fsanitize=thread
 
-TEST_INPUT = 5 800 200 200
+TEST_INPUT = 100 800 200 500
 
 #=====================================#
 #=============== Rules ===============#
@@ -64,10 +62,10 @@ objs/%.o:src/*%.c $(INCLUDE_DIR)/*
 	@$(CC) -c $(CFLAGS) -o $@ $<
 	@echo "🔨 Compiling: $<"
 
-all: $(OUTPUT)
+all: $(NAME)
 
-$(OUTPUT):$(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(NO_DEAD_CODE) -pthread -o $(OUTPUT)
+$(NAME):$(OBJS)
+	@$(CC) $(OBJS) $(LDFLAGS) $(NO_DEAD_CODE) -pthread -o $(NAME)
 	@echo "✅ Built $(NAME)"
 
 clean:
@@ -84,8 +82,8 @@ re: fclean all
 #=========== Special Rules ===========#
 #=====================================#
 
-run: $(OUTPUT)
-	./$(OUTPUT) $(TEST_INPUT)
+run: $(NAME)
+	./$(NAME) $(TEST_INPUT)
 
 norm:
 	@echo "\033[92m========= $(NAME) norm ========\033[0m"

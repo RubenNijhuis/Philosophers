@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:05:27 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/08/07 19:27:18 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	not being able to use `exit()` I had to add
 	a lot of return checks
  */
-int32_t	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_program_data	pd;
 	t_philosopher	*philos;

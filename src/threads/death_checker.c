@@ -24,18 +24,25 @@ static void	set_stop_sim_lock(t_program_data *pd)
 
 static bool	is_philo_dead(t_philosopher *philo, t_program_data *pd)
 {
-	if ((gettime() - philo->last_time_eaten) > pd->time_to_die)
+	size_t	i;
+
+	i = 0;
+	while (i < pd->amount_philos)
 	{
-		print_state(philo, died);
-		set_stop_sim_lock(pd);
-		return (true);
+		if ((gettime() - philo[i].last_time_eaten) > pd->time_to_die)
+		{
+			print_state(&philo[i], died);
+			set_stop_sim_lock(pd);
+			return (true);
+		}
+		i++;
 	}
 	return (false);
 }
 
 static bool	all_full(t_philosopher *philos, t_program_data *pd)
 {
-	uint32_t	i;
+	size_t		i;
 	uint32_t	amount_full;
 
 	i = 0;
@@ -69,19 +76,13 @@ void	*run_death_checker(void *philos_array)
 {
 	t_philosopher	*philos;
 	t_program_data	*pd;
-	uint32_t		i;
 
 	philos = (t_philosopher *)philos_array;
 	pd = philos[0].pd;
-	while (1)
+	while (true)
 	{
-		i = 0;
-		while (i < pd->amount_philos)
-		{
-			if (is_philo_dead(&philos[i], pd) == true)
-				return (NULL);
-			i++;
-		}
+		if (is_philo_dead(philos, pd) == true)
+			return (NULL);
 		if (pd->amount_meals > 0 && all_full(philos, pd) == true)
 			return (NULL);
 		usleep(CHECKER_INTERVAL);
