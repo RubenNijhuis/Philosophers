@@ -6,14 +6,15 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 14:56:02 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2022/05/17 22:18:26 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:34:51 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#include <unistd.h>	// usleep
-#include <stdint.h>	// uint32_t
+#include <unistd.h>
+#include <stdint.h>
+#include <stddef.h>
 
 static void	set_stop_sim_lock(t_program_data *pd)
 {

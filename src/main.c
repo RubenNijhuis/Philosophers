@@ -6,11 +6,13 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 10:13:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/08/07 19:27:18 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:38:07 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+#include <stdint.h>
 #include <stdlib.h>
 
 /*

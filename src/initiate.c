@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/10 13:25:22 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:04:54 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:38:22 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	initiate_data(t_program_data *pd, char **argv)
 /*
 	Initiates the table bits, philosopher threads and forks
 	As well as the death checker thread
- */
+*/
 bool	initiate_table(t_program_data *pd, t_philosopher *philos)
 {
 	size_t	i;

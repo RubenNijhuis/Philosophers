@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/27 13:05:58 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/05/17 22:13:59 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/08 12:34:15 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	make_philo_thread(t_philosopher *philos, t_program_data *pd, \
 
 void	join_threads(uint32_t amount_philos, pthread_t *philo_threads)
 {
-	uint32_t	i;
+	size_t	i;
 
 	i = 0;
 	while (i < amount_philos)
