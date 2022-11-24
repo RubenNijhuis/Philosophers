@@ -84,8 +84,11 @@ void	*run_death_checker(void *philos_array)
 	{
 		if (is_philo_dead(philos, pd) == true)
 			return (NULL);
-		if (pd->amount_meals > 0 && all_full(philos, pd) == true)
-			return (NULL);
+		if (pd->amount_meals > 0)
+		{
+			if (all_full(philos, pd) == true)
+				return (NULL);
+		}
 		usleep(CHECKER_INTERVAL);
 	}
 	return (NULL);
